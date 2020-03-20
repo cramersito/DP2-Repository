@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
 -- Host: localhost    Database: dp2_spring
 -- ------------------------------------------------------
--- Server version	8.0.17
+-- Server version	8.0.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,60 +23,98 @@ DROP TABLE IF EXISTS `administrator`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `administrator` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `version` int NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
   `telephone_number` varchar(255) DEFAULT NULL,
-  `photo_id` int(11) DEFAULT NULL,
-  `user_account_id` int(11) NOT NULL,
+  `user_account_id` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_2a5vcjo3stlfcwadosjfq49l1` (`user_account_id`),
   UNIQUE KEY `UK_jj3mmcc0vjobqibj67dvuwihk` (`email`),
-  KEY `FK_q8xtaapphhoue8f1skpjv81p7` (`photo_id`),
-  CONSTRAINT `FK_2a5vcjo3stlfcwadosjfq49l1` FOREIGN KEY (`user_account_id`) REFERENCES `user_account` (`id`),
-  CONSTRAINT `FK_q8xtaapphhoue8f1skpjv81p7` FOREIGN KEY (`photo_id`) REFERENCES `photo` (`id`)
+  CONSTRAINT `FK_2a5vcjo3stlfcwadosjfq49l1` FOREIGN KEY (`user_account_id`) REFERENCES `user_account` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `comment`
+-- Table structure for table `certificate`
 --
 
-DROP TABLE IF EXISTS `comment`;
+DROP TABLE IF EXISTS `certificate`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `comment` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
-  `text` varchar(255) DEFAULT NULL,
-  `written_moment` datetime(6) NOT NULL,
-  `rent_out_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKjei8pnwif8vhbu7n0t1nkf5tf` (`rent_out_id`),
-  CONSTRAINT `FKjei8pnwif8vhbu7n0t1nkf5tf` FOREIGN KEY (`rent_out_id`) REFERENCES `rent_out` (`id`)
+CREATE TABLE `certificate` (
+  `id` int NOT NULL,
+  `version` int NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `entity` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `customization`
+-- Table structure for table `clerk`
 --
 
-DROP TABLE IF EXISTS `customization`;
+DROP TABLE IF EXISTS `clerk`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customization` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
-  `discount_codes` varchar(255) DEFAULT NULL,
-  `eco_truki` varchar(255) DEFAULT NULL,
+CREATE TABLE `clerk` (
+  `id` int NOT NULL,
+  `version` int NOT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `gold_level` int(11) NOT NULL,
-  `silver_level` int(11) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `surname` varchar(255) DEFAULT NULL,
+  `telephone_number` varchar(255) DEFAULT NULL,
+  `user_account_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_kwvi1eq3k3nnn2jc10wyci9jv` (`email`)
+  UNIQUE KEY `UK_6k8rn4qoiog0pd95swagpv80w` (`user_account_id`),
+  UNIQUE KEY `UK_1unvox2y1gpkt89uoocyi3hvd` (`email`),
+  CONSTRAINT `FK_6k8rn4qoiog0pd95swagpv80w` FOREIGN KEY (`user_account_id`) REFERENCES `user_account` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `course`
+--
+
+DROP TABLE IF EXISTS `course`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `course` (
+  `id` int NOT NULL,
+  `version` int NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `end_date` datetime(6) NOT NULL,
+  `price` double NOT NULL,
+  `start_date` datetime(6) NOT NULL,
+  `certificate_id` int NOT NULL,
+  `clerk_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_ilrl7vaxr0tfv411fdk4jmcc` (`certificate_id`),
+  KEY `FKfrf5nvwm88lm7uadol9isendq` (`clerk_id`),
+  CONSTRAINT `FK6edmqsliwuaq7k1x8plihg70j` FOREIGN KEY (`certificate_id`) REFERENCES `certificate` (`id`),
+  CONSTRAINT `FKfrf5nvwm88lm7uadol9isendq` FOREIGN KEY (`clerk_id`) REFERENCES `clerk` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `course_owners_registered`
+--
+
+DROP TABLE IF EXISTS `course_owners_registered`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `course_owners_registered` (
+  `course_id` int NOT NULL,
+  `owners_registered_id` int NOT NULL,
+  UNIQUE KEY `UK_lfuqjy7xil39fscae57pu19jt` (`owners_registered_id`),
+  KEY `FKogmlxkv05m4usx94tylbgsr6b` (`course_id`),
+  CONSTRAINT `FKdeoohltqub34yy772vn1i0gfa` FOREIGN KEY (`owners_registered_id`) REFERENCES `owner` (`id`),
+  CONSTRAINT `FKogmlxkv05m4usx94tylbgsr6b` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -88,7 +126,22 @@ DROP TABLE IF EXISTS `hibernate_sequence`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hibernate_sequence` (
-  `next_val` bigint(20) DEFAULT NULL
+  `next_val` bigint DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `law`
+--
+
+DROP TABLE IF EXISTS `law`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `law` (
+  `id` int NOT NULL,
+  `version` int NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -100,143 +153,79 @@ DROP TABLE IF EXISTS `owner`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `owner` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `version` int NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
   `telephone_number` varchar(255) DEFAULT NULL,
-  `photo_id` int(11) DEFAULT NULL,
-  `user_account_id` int(11) NOT NULL,
-  `accumulated_months` int(11) NOT NULL,
-  `iban` varchar(255) DEFAULT NULL,
+  `user_account_id` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_hc0nwk401f7t7pohcq2vounjc` (`user_account_id`),
   UNIQUE KEY `UK_kcaoebbgb82ro5cw9nqhw19qb` (`email`),
-  KEY `FK_r4iqvt4tk4jpapqdqb9rsfy07` (`photo_id`),
-  CONSTRAINT `FK_hc0nwk401f7t7pohcq2vounjc` FOREIGN KEY (`user_account_id`) REFERENCES `user_account` (`id`),
-  CONSTRAINT `FK_r4iqvt4tk4jpapqdqb9rsfy07` FOREIGN KEY (`photo_id`) REFERENCES `photo` (`id`)
+  CONSTRAINT `FK_hc0nwk401f7t7pohcq2vounjc` FOREIGN KEY (`user_account_id`) REFERENCES `user_account` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `photo`
+-- Table structure for table `pet`
 --
 
-DROP TABLE IF EXISTS `photo`;
+DROP TABLE IF EXISTS `pet`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `photo` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
-  `content` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `structure` longblob,
-  `suffix` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `rent_out`
---
-
-DROP TABLE IF EXISTS `rent_out`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `rent_out` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
-  `is_active` bit(1) NOT NULL,
-  `month` int(11) NOT NULL,
+CREATE TABLE `pet` (
+  `id` int NOT NULL,
+  `version` int NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
   `start_date` datetime(6) NOT NULL,
-  `renter_id` int(11) NOT NULL,
-  `smallholding_id` int(11) NOT NULL,
-  `valuation_id` int(11) DEFAULT NULL,
+  `tipo` varchar(255) DEFAULT NULL,
+  `law_id` int DEFAULT NULL,
+  `owner_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK2w4idcn2jnkaxbh3r2pebf5ie` (`renter_id`),
-  KEY `FKi1vsr0uw536n5xewcq6hupv0b` (`smallholding_id`),
-  KEY `FKbw5w7l7d1djjia82bwqjkjndr` (`valuation_id`),
-  CONSTRAINT `FK2w4idcn2jnkaxbh3r2pebf5ie` FOREIGN KEY (`renter_id`) REFERENCES `renter` (`id`),
-  CONSTRAINT `FKbw5w7l7d1djjia82bwqjkjndr` FOREIGN KEY (`valuation_id`) REFERENCES `valuation` (`id`),
-  CONSTRAINT `FKi1vsr0uw536n5xewcq6hupv0b` FOREIGN KEY (`smallholding_id`) REFERENCES `smallholding` (`id`)
+  KEY `FK7roeeja6hj9cpfw1scke4xkns` (`law_id`),
+  KEY `FK7qfti9yba86tgfe9oobeqxfxg` (`owner_id`),
+  CONSTRAINT `FK7qfti9yba86tgfe9oobeqxfxg` FOREIGN KEY (`owner_id`) REFERENCES `owner` (`id`),
+  CONSTRAINT `FK7roeeja6hj9cpfw1scke4xkns` FOREIGN KEY (`law_id`) REFERENCES `law` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `renter`
+-- Table structure for table `transport`
 --
 
-DROP TABLE IF EXISTS `renter`;
+DROP TABLE IF EXISTS `transport`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `renter` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `surname` varchar(255) DEFAULT NULL,
-  `telephone_number` varchar(255) DEFAULT NULL,
-  `photo_id` int(11) DEFAULT NULL,
-  `user_account_id` int(11) NOT NULL,
-  `iban` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_32merbwan7h6a2mgwcxpyxlts` (`user_account_id`),
-  UNIQUE KEY `UK_8lx5melb9aiqsx6uaw8ssbb5r` (`email`),
-  KEY `FK_2mp2pw1716eb4hf20jtowwx3s` (`photo_id`),
-  CONSTRAINT `FK_2mp2pw1716eb4hf20jtowwx3s` FOREIGN KEY (`photo_id`) REFERENCES `photo` (`id`),
-  CONSTRAINT `FK_32merbwan7h6a2mgwcxpyxlts` FOREIGN KEY (`user_account_id`) REFERENCES `user_account` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `smallholding`
---
-
-DROP TABLE IF EXISTS `smallholding`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `smallholding` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `farming_type` varchar(255) DEFAULT NULL,
-  `images` varchar(255) DEFAULT NULL,
-  `is_available` bit(1) NOT NULL,
-  `latitude` varchar(255) DEFAULT NULL,
-  `locality` varchar(255) DEFAULT NULL,
-  `longitude` varchar(255) DEFAULT NULL,
-  `max_duration` int(11) DEFAULT NULL,
-  `postal_code` varchar(255) DEFAULT NULL,
-  `price` double NOT NULL,
-  `province` varchar(255) DEFAULT NULL,
-  `size` int(11) NOT NULL,
+CREATE TABLE `transport` (
+  `id` int NOT NULL,
+  `version` int NOT NULL,
+  `company` varchar(255) DEFAULT NULL,
+  `destination` varchar(255) DEFAULT NULL,
+  `origin` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `owner_id` int(11) NOT NULL,
+  `clerk_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKt41w5r3e6kec8wt0oq2r20cs1` (`owner_id`),
-  CONSTRAINT `FKt41w5r3e6kec8wt0oq2r20cs1` FOREIGN KEY (`owner_id`) REFERENCES `owner` (`id`)
+  KEY `FK80xby0rui7rii9sotvd439nyh` (`clerk_id`),
+  CONSTRAINT `FK80xby0rui7rii9sotvd439nyh` FOREIGN KEY (`clerk_id`) REFERENCES `clerk` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `smallholding_photos`
+-- Table structure for table `transport_pets`
 --
 
-DROP TABLE IF EXISTS `smallholding_photos`;
+DROP TABLE IF EXISTS `transport_pets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `smallholding_photos` (
-  `smallholding_id` int(11) NOT NULL,
-  `photos_id` int(11) NOT NULL,
-  UNIQUE KEY `UK_33kylxybbnpwcxp2myq46wk2w` (`photos_id`),
-  KEY `FK19104dxu3xkf40ux1yah94y3x` (`smallholding_id`),
-  CONSTRAINT `FK19104dxu3xkf40ux1yah94y3x` FOREIGN KEY (`smallholding_id`) REFERENCES `smallholding` (`id`),
-  CONSTRAINT `FKb78d844pinbt9yblhjx7svm5d` FOREIGN KEY (`photos_id`) REFERENCES `photo` (`id`)
+CREATE TABLE `transport_pets` (
+  `transport_id` int NOT NULL,
+  `pets_id` int NOT NULL,
+  UNIQUE KEY `UK_9u0reckhjikil2m3pqlrs3t0d` (`pets_id`),
+  KEY `FK27h047c1hjev50eaauw303wdl` (`transport_id`),
+  CONSTRAINT `FK27h047c1hjev50eaauw303wdl` FOREIGN KEY (`transport_id`) REFERENCES `transport` (`id`),
+  CONSTRAINT `FKkn0vr9cwncoo71lpnwnj3yymg` FOREIGN KEY (`pets_id`) REFERENCES `pet` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -248,8 +237,8 @@ DROP TABLE IF EXISTS `user_account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_account` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `version` int NOT NULL,
   `is_banned` bit(1) NOT NULL,
   `password` varchar(60) DEFAULT NULL,
   `username` varchar(60) DEFAULT NULL,
@@ -266,26 +255,10 @@ DROP TABLE IF EXISTS `user_account_authorities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_account_authorities` (
-  `user_account_id` int(11) NOT NULL,
+  `user_account_id` int NOT NULL,
   `authority` varchar(255) DEFAULT NULL,
   KEY `FKqg5yuqktw7kjmodb7k1rg3f2o` (`user_account_id`),
   CONSTRAINT `FKqg5yuqktw7kjmodb7k1rg3f2o` FOREIGN KEY (`user_account_id`) REFERENCES `user_account` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `valuation`
---
-
-DROP TABLE IF EXISTS `valuation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `valuation` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
-  `mark` int(11) NOT NULL,
-  `valuation_moment` datetime(6) NOT NULL,
-  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -298,4 +271,4 @@ CREATE TABLE `valuation` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-15 16:18:21
+-- Dump completed on 2020-03-20 19:41:12
