@@ -1,0 +1,16 @@
+Al grupo de mañana respecto a la planificacion:
+
+Repartir las entidades de forma que se mezcle lo menos posible los trbajos de uno con otro. De la forma menos acoplada posible.
+Dependencia funcional.
+Una tarea para implementar el modelo en primer lugar para poder a realizar las HU con algo de base bien hecho.
+Colchon de seguridad.
+
+
+Feedback nuestro:
+
+Cuando esten divididias las HU es conveniente que al menos cuando haya algo implementado, debe probarlo otra persona.
+
+
+Dejar explicito, rol, condicion y accion. El para tiene que decirlo el cliente.
+Especificar algo mas los datos, animal con id tal. Completar los escenarios con datos realistas para realizar las pruebas.
+

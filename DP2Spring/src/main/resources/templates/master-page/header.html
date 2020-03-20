@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+
+
+
+
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background:green !important;"  th:fragment="frag-header">
+<style>
+a{
+color: white;
+
+}
+
+
+</style>
+  <a class="navbar-brand" href="#">PET-CLINIC</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar" >
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Publicar curso</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Realizar transporte</a>
+      </li>    
+    </ul>
+  </div>  
+</nav>
+
+
+</html>

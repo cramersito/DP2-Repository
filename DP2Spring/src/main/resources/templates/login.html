@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{master-page/layout :: layout(~{::title}, ~{::div.content})}">
+  <head>
+    <title>Login</title>
+  </head>
+  
+  <body>
+    <div class="content">
+
+<section class="mbr-section form1 cid-rSEqmmuXe6" id="form1-z">
+
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="title col-12 col-lg-8">
+                <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
+                    Inicio de sesión</h2>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="media-container-column col-lg-8" data-form-type="formoid">
+                <!---Formbuilder Form--->
+                <form  th:action="@{/login}" method="post" class="mbr-form form-with-styler" data-form-title="Mobirise Form"><input type="hidden" name="email" data-form-email="true" value="yzwE9/RxW/SrFWAwa6ssgZr6+DuITA0+Wvdgy1uHeqplluC2DtDn3OYClUUkKKI3X93iTkQlejwn26F2CmL/oq8aUp6aphezebgC2mHt1WuO3YpumP+xuLg4W7mgOxeX">
+                    <div class="row">
+                        <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
+                        <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
+                        </div>
+                    </div>
+                    <div class="dragArea row">
+                        <div data-for="usuario" class="col-md-12  form-group">
+                            <label for="phone-form1-z" class="form-control-label mbr-fonts-style display-7">Usuario</label>
+                            <input type="text" name="username" data-form-field="usuario" class="form-control display-7" id="phone-form1-z">
+                        </div>
+                        <div data-for="contraseña" class="col-md-12 form-group">
+                            <label for="message-form1-z" class="form-control-label mbr-fonts-style display-7">Contraseña</label>
+                            <input type="password" name="password" data-form-field="contraseña" class="form-control display-7" id="message-form1-z">
+                        </div>
+						<div th:if="${param.error}">
+            			Contraseña o usuario inválido.
+						</div>
+                        <div class="col-md-12 input-group-btn align-center"><button type="submit" class="btn btn-form btn-secondary display-4">Iniciar sesión</button></div>
+                    </div>
+                </form><!---Formbuilder Form--->
+            </div>
+        </div>
+    </div>
+</section>
+
+    </div>
+  </body>
+</html>

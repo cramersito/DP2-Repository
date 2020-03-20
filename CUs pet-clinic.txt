@@ -1,0 +1,2 @@
+Owner1-> busco owners "Find owners" ->> todos los owners son mios owner1 ->> a esos owner puedo crearles mascotas
+-> se puede crear varias mascotas y añadirles visitas. Tambien se puede modificar los datos de los owners
