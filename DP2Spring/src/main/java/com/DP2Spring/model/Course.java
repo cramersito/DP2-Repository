@@ -102,6 +102,32 @@ private static final long serialVersionUID = 1L;
 	//@Valid
 	@OneToMany
 	private Collection<Owner> OwnersRegistered;
+
+	public Clerk getClerk() {
+		return clerk;
+	}
+
+	public void setClerk(Clerk clerk) {
+		this.clerk = clerk;
+	}
+
+	public Certificate getCertificate() {
+		return certificate;
+	}
+
+	public void setCertificate(Certificate certificate) {
+		this.certificate = certificate;
+	}
+
+	public Collection<Owner> getOwnersRegistered() {
+		return OwnersRegistered;
+	}
+
+	public void setOwnersRegistered(Collection<Owner> ownersRegistered) {
+		OwnersRegistered = ownersRegistered;
+	}
+	
+	
 	
 	
 }
