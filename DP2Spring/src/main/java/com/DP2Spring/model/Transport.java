@@ -26,7 +26,7 @@ public class Transport  extends DomainEntity{
 	@NotBlank
 	private String destination;
 	@NotBlank
-	@Pattern(regexp = "^NOTRANSPORT|PENDING|TRANSPORTED$")
+	@Pattern(regexp = "^PENDING|TRANSPORTED$")
 	private String status;
 	
 	// Constructors ------------------------------------

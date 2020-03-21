@@ -19,7 +19,8 @@ public class PetService {
     @Autowired
     private PetRepository PetRepository;
 
-	public PetService() {
+
+    public PetService() {
 		super();
 	}
     
@@ -33,6 +34,14 @@ public class PetService {
 
         return result;
     }
+    
+    public Collection<Pet> petsPendingTransport(){
+        Collection<Pet> result;
+
+        result = this.PetRepository.PetsPendingTransport();
+        return result;
+    }
+    
     
 
 }

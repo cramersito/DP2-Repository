@@ -15,5 +15,7 @@ public interface PetRepository  extends JpaRepository<Transport,Integer> {
     @Query("select p from Pet p where p.owner.id = ?1")
     Collection<Pet> findPetsByOwnerId(int ownerId);
 	
-	
+    @Query("select t.pets from Transport t where t.status = 'PENDING'")
+    Collection<Pet> PetsPendingTransport();
+    
 }

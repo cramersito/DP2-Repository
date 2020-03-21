@@ -111,7 +111,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `transport` WRITE;
 /*!40000 ALTER TABLE `transport` DISABLE KEYS */;
-INSERT INTO `transport` VALUES (500,0,'SEUR','Madrid','Rota','NOTRANSPORT',200),(501,0,'SEUR','Madrid','Rota','TRANSPORTED',200),(502,0,'SEUR','Madrid','Rota','PENDING',200),(503,0,'SEUR','Madrid','Rota','NOTRANSPORT',201),(504,0,'SEUR','Madrid','Rota','TRANSPORTED',202),(505,0,'SEUR','Madrid','Rota','NOTRANSPORT',202);
+INSERT INTO `transport` VALUES (500,0,null,'Madrid','Rota','PENDING',200),(501,0,'SEUR','Madrid','Rota','TRANSPORTED',200),(502,0,'SEUR','Madrid','Rota','PENDING',200),(503,0,null,'Madrid','Rota','PENDING',201),(504,0,'SEUR','Madrid','Rota','TRANSPORTED',202),(505,0,null,'Madrid','Rota','PENDING',202);
 /*!40000 ALTER TABLE `transport` ENABLE KEYS */;
 UNLOCK TABLES;
 

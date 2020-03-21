@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.Validator;
 
+import com.DP2Spring.model.Clerk;
+import com.DP2Spring.model.Pet;
 import com.DP2Spring.model.Transport;
 import com.DP2Spring.repository.TransportRepository;
 
@@ -26,6 +28,9 @@ public class TransportService {
 
     @Autowired
     private OwnerService ownerService;
+    
+    @Autowired
+    private ClerkService clerkService;
 
     @Autowired
     private Validator validator;
@@ -38,7 +43,15 @@ public class TransportService {
 
     
 
+    //Transportes pendientes
     
+    public Collection<Transport> transportsPending(){
+        Collection<Transport> result;
+    	Clerk prinicpal = this.clerkService.findByPrincipal();
+   
+        result = this.transportRepository.transportsPending();
+        return result;
+    }
 
     
     //Others
