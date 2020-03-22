@@ -27,7 +27,7 @@ public class PetService {
     
     
 	
-    public Collection<Pet> findSmallholdingsByOwnerId(int ownerId){
+    public Collection<Pet> findPetsByOwnerId(int ownerId){
         Collection<Pet> result;
 
         result = this.PetRepository.findPetsByOwnerId(ownerId);

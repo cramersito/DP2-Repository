@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{master-page/layout :: layout(~{::title}, ~{::div.content})}">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Mis mascotas</title>
+</head>
+<body>
+
+	<div class="content container">
+
+
+		<h2>Mis mascotas</h2>
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Tipo</th>
+					<th>Cumpleaños</th>
+				
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="t : ${pets}">
+				
+					<td th:text="${t.nombre}"></td>
+					<td th:text="${t.tipo}"></td>
+					<td th:text="${t.birthday}"></td>										
+				</tr>
+				
+				
+
+			</tbody>
+		</table>
+		
+		<div class="container" style="text-align:center;">
+		<a class="btn btn-success" th:href="@{~/transport/create}" > Transportar animales</a>
+		</div>
+
+	</div>
+
+
+</body>
+</html>

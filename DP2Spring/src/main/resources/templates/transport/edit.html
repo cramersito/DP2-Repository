@@ -26,21 +26,21 @@
                     
                     <div class="dragArea row">
                     
-                        <div data-for="message" class="col-md-12 form-group">
+                        <div data-for="message" class="col-md-12 form-group" sec:authorize="hasAuthority('CLERK')">
                          <label for="email-form1-17" class="form-control-label mbr-fonts-style display-7" style="color: #2a3d2e !important;">Compañia</label>
                             <input type="text"  id="txtcompany1"  placeholder="Escribe una compañia" th:field="*{company}"  th:errorclass="fieldError" data-form-field="Message" class="form-control display-7" ></input>
                             <p th:if="${#fields.hasErrors('company')}" style="color: red !important;">
                         		<span th:errors="*{company}"></span>
                     		</p>
                         </div>
-                       <div data-for="message" class="col-md-12 form-group" sec:authorize="hasRole('OWNER')">
+                       <div data-for="message" class="col-md-12 form-group" sec:authorize="hasAuthority('OWNER')">
                          <label for="email-form1-17" class="form-control-label mbr-fonts-style display-7" style="color: #2a3d2e !important;">Origen</label>
                             <input type="text"  id="origin"  placeholder="Escribe un origen" th:field="*{origin}"  th:errorclass="fieldError" data-form-field="Message" class="form-control display-7" ></input>
                             <p th:if="${#fields.hasErrors('origin')}" style="color: red !important;">
                         		<span th:errors="*{origin}"></span>
                     		</p>
                         </div>
-                       <div data-for="message" class="col-md-12 form-group" sec:authorize="hasRole('OWNER')">
+                       <div data-for="message" class="col-md-12 form-group" sec:authorize="hasAuthority('OWNER')">
                          <label for="email-form1-17" class="form-control-label mbr-fonts-style display-7" style="color: #2a3d2e !important;">Destino</label>
                             <input type="text"  id="txtcompany1"  placeholder="Escribe una compañia" th:field="*{destination}"  th:errorclass="fieldError" data-form-field="Message" class="form-control display-7" ></input>
                             <p th:if="${#fields.hasErrors('destination')}" style="color: red !important;">

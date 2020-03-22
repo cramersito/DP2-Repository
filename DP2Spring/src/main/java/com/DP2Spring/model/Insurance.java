@@ -5,7 +5,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "law")
+@Table(name = "insurance")
 public class Insurance extends DomainEntity{
 	
 	
