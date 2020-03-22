@@ -33,7 +33,7 @@ private static final long serialVersionUID = 1L;
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date startDate;
+	private Date birthday;
 	
 	// Constructors ------------------------------------
 	
@@ -58,20 +58,19 @@ private static final long serialVersionUID = 1L;
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
 	
 	
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
 	// Associations -------------------------------------
-	
-	
+
 
 	@NotNull
 	@Valid

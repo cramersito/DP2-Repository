@@ -76,13 +76,13 @@ INSERT INTO `hibernate_sequence` VALUES (1);
 UNLOCK TABLES;
 
 --
--- Dumping data for table `law`
+-- Dumping data for table `insurance`
 --
 
-LOCK TABLES `law` WRITE;
-/*!40000 ALTER TABLE `law` DISABLE KEYS */;
-INSERT INTO `law` VALUES (20,0,'Ley 1'),(21,0,'Ley 2'),(22,0,'Ley 3'),(23,0,'Ley 4'),(24,0,'Ley 5'),(25,0,'Ley 6');
-/*!40000 ALTER TABLE `law` ENABLE KEYS */;
+LOCK TABLES `insurance` WRITE;
+/*!40000 ALTER TABLE `insurance` DISABLE KEYS */;
+INSERT INTO `insurance` VALUES (20,0,'Ley 1'),(21,0,'Ley 2'),(22,0,'Ley 3'),(23,0,'Ley 4'),(24,0,'Ley 5'),(25,0,'Ley 6');
+/*!40000 ALTER TABLE `insurance` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -111,7 +111,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `transport` WRITE;
 /*!40000 ALTER TABLE `transport` DISABLE KEYS */;
-INSERT INTO `transport` VALUES (500,0,'SEUR','Madrid','Rota','NOTRANSPORT',200),(501,0,'SEUR','Madrid','Rota','TRANSPORTED',200),(502,0,'SEUR','Madrid','Rota','PENDING',200),(503,0,'SEUR','Madrid','Rota','NOTRANSPORT',201),(504,0,'SEUR','Madrid','Rota','TRANSPORTED',202),(505,0,'SEUR','Madrid','Rota','NOTRANSPORT',202);
+INSERT INTO `transport` VALUES (500,0,null,'Madrid','Rota','PENDING',200),(501,0,'SEUR','Madrid','Rota','TRANSPORTED',200),(502,0,'SEUR','Madrid','Rota','PENDING',200),(503,0,null,'Madrid','Rota','PENDING',201),(504,0,'SEUR','Madrid','Rota','TRANSPORTED',202),(505,0,null,'Madrid','Rota','PENDING',202);
 /*!40000 ALTER TABLE `transport` ENABLE KEYS */;
 UNLOCK TABLES;
 

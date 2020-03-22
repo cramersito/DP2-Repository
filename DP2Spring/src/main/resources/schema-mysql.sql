@@ -131,13 +131,13 @@ CREATE TABLE `hibernate_sequence` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `law`
+-- Table structure for table `insurance`
 --
 
-DROP TABLE IF EXISTS `law`;
+DROP TABLE IF EXISTS `insurance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `law` (
+CREATE TABLE `insurance` (
   `id` int NOT NULL,
   `version` int NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
@@ -179,15 +179,15 @@ CREATE TABLE `pet` (
   `id` int NOT NULL,
   `version` int NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
-  `start_date` datetime(6) NOT NULL,
+  `birthday` datetime(6) NOT NULL,
   `tipo` varchar(255) DEFAULT NULL,
-  `law_id` int DEFAULT NULL,
+  `insurance_id` int DEFAULT NULL,
   `owner_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK7roeeja6hj9cpfw1scke4xkns` (`law_id`),
+  KEY `FK7roeeja6hj9cpfw1scke4xkns` (`insurance_id`),
   KEY `FK7qfti9yba86tgfe9oobeqxfxg` (`owner_id`),
   CONSTRAINT `FK7qfti9yba86tgfe9oobeqxfxg` FOREIGN KEY (`owner_id`) REFERENCES `owner` (`id`),
-  CONSTRAINT `FK7roeeja6hj9cpfw1scke4xkns` FOREIGN KEY (`law_id`) REFERENCES `law` (`id`)
+  CONSTRAINT `FK7roeeja6hj9cpfw1scke4xkns` FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

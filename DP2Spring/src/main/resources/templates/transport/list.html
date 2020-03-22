@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{master-page/layout :: layout(~{::title}, ~{::div.content})}">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Transportes</title>
+</head>
+<body>
+
+	<div class="content container">
+
+
+		<h2>Transportes Pendientes</h2>
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Origen</th>
+					<th>Destino</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="t : ${transportesPendientes}">
+					<td th:text="${t.origin}"></td>
+					<td th:text="${t.destination}"></td>
+					<td><a class="btn btn-success" th:href="@{~/transport/edit?transportId=} + ${t.id}" > Solicitar transporte</a></td>
+				</tr>
+
+			</tbody>
+		</table>
+
+	</div>
+
+
+</body>
+</html>

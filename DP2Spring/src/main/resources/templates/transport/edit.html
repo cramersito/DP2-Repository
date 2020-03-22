@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	th:replace="~{master-page/layout :: layout(~{::title}, ~{::div.content})}" >
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Transportes</title>
+</head>
+<body>
+
+	<div class="content container">
+
+
+		<h2 style="color: #2a3d2e !important;" th:if="${transport.id != 0}">
+			Realizar transporte </h2>
+		<h2 style="color: #2a3d2e !important;" th:if="${transport.id == 0}">
+			Solicitar transporte a clínica</h2>
+			
+			
+			<form th:action="@{/transport/edit/}" id="myForm" th:object="${transport}" method="post" class="mbr-form form-with-styler" data-form-title=" Form">
+
+ 					<input type="hidden" th:field="*{id}" th:value="${transport.id}"/>
+            		<input type="hidden" th:field="*{version}" th:value="${transport.version}"/>
+                    <input type="hidden" th:field="*{status}" th:value="${transport.status}"/>
+                    
+                    
+                    <div class="dragArea row">
+                    
+                        <div data-for="message" class="col-md-12 form-group" sec:authorize="hasAuthority('CLERK')">
+                         <label for="email-form1-17" class="form-control-label mbr-fonts-style display-7" style="color: #2a3d2e !important;">Compañia</label>
+                            <input type="text"  id="txtcompany1"  placeholder="Escribe una compañia" th:field="*{company}"  th:errorclass="fieldError" data-form-field="Message" class="form-control display-7" ></input>
+                            <p th:if="${#fields.hasErrors('company')}" style="color: red !important;">
+                        		<span th:errors="*{company}"></span>
+                    		</p>
+                        </div>
+                       <div data-for="message" class="col-md-12 form-group" sec:authorize="hasAuthority('OWNER')">
+                         <label for="email-form1-17" class="form-control-label mbr-fonts-style display-7" style="color: #2a3d2e !important;">Origen</label>
+                            <input type="text"  id="origin"  placeholder="Escribe un origen" th:field="*{origin}"  th:errorclass="fieldError" data-form-field="Message" class="form-control display-7" ></input>
+                            <p th:if="${#fields.hasErrors('origin')}" style="color: red !important;">
+                        		<span th:errors="*{origin}"></span>
+                    		</p>
+                        </div>
+                       <div data-for="message" class="col-md-12 form-group" sec:authorize="hasAuthority('OWNER')">
+                         <label for="email-form1-17" class="form-control-label mbr-fonts-style display-7" style="color: #2a3d2e !important;">Destino</label>
+                            <input type="text"  id="txtcompany1"  placeholder="Escribe una compañia" th:field="*{destination}"  th:errorclass="fieldError" data-form-field="Message" class="form-control display-7" ></input>
+                            <p th:if="${#fields.hasErrors('destination')}" style="color: red !important;">
+                        		<span th:errors="*{destination}"></span>
+                    		</p>
+                        </div>
+
+    
+
+		            <div data-for="message" class="col-md-12 form-group">
+                        <div class="col-md-12 input-group-btn align-center">
+                        <button name="save" type="submit" class="btn btn-form btn-success display-4">
+        				Guardar
+                        </button>
+                        
+        
+                        <a href="/transport/list"
+                        class="btn btn-secondary">
+                        Volver
+                        </a>
+                     </div>
+    
+                        
+                        
+                        </div>
+                    </div>
+			</form>
+
+	</div>
+
+
+</body>
+</html>
