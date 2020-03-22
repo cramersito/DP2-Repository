@@ -2,6 +2,8 @@ package com.DP2Spring.service;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +15,7 @@ import com.DP2Spring.model.Clerk;
 import com.DP2Spring.repository.ClerkRepository;
 
 @Service
+@Transactional
 public class ClerkService {
 
     // Repository

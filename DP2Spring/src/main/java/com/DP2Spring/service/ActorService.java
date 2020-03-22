@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import com.DP2Spring.security.Authority;
 import com.DP2Spring.security.UserAccount;
 
 @Service
+@Transactional
 public class ActorService {
 
 	private static final Log log = LogFactory.getLog(ActorService.class);

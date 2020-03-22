@@ -1,11 +1,91 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{master-page/layout :: layout(~{::title}, ~{::div.content})}">
+<head>
+<title>Página de bienvenida</title>
+</head>
 
 <body>
 	<div class="content">
+		<form th:action="@{/course/create}" id="myForm" th:object="${course}"
+			method="post">
+					<input type="hidden" th:field="*{id}" th:value="${course.id}"/>
+            		<input type="hidden" th:field="*{version}" th:value="${course.version}"/>
+            		<input type="hidden" th:field="*{clerk}" th:value="${course.clerk}"/>
+            		<input type="hidden" th:field="*{certificate}" th:value="${course.certificate}"/>
+            		
+			
 
-		<p>boojdsbak</p>
+			<div data-for="message" class="col-md-12 form-group">
+				<label for="email-form1-17"
+					class="form-control-label mbr-fonts-style display-7"
+					style="color: #2a3d2e !important;">Descripcion</label>
+				<textarea type="text" th:field="*{description}"
+					th:errorclass="fieldError" data-form-field="Message"
+					class="form-control display-7"></textarea>
+				<p th:if="${#fields.hasErrors('description')}"
+					style="color: red !important;">
+					<span th:errors="*{description}"></span>
+				</p>
+			</div>
+
+
+			<div data-for="message" class="col-md-12 form-group">
+				<label for="email-form1-17"
+					class="form-control-label mbr-fonts-style display-7"
+					style="color: #2a3d2e !important;">Price</label> <input
+					type="number" step="0.1" th:field="*{price}"
+					th:errorclass="fieldError" data-form-field="Message"
+					class="form-control display-7"></input>
+				<p th:if="${#fields.hasErrors('price')}"
+					style="color: red !important;">
+					<span th:errors="*{price}"></span>
+				</p>
+			</div>
+
+
+			<div data-for="message" class="col-md-12 form-group">
+				<label for="email-form1-17"
+					class="form-control-label mbr-fonts-style display-7"
+					style="color: #2a3d2e !important;">Fecha inicio</label> <input
+					type="datetime" th:field="*{startDate}" th:errorclass="fieldError"
+					data-form-field="Message" class="form-control display-7"></input>
+				<p th:if="${#fields.hasErrors('startDate')}"
+					style="color: red !important;">
+					<span th:errors="*{startDate}"></span>
+				</p>
+			</div>
+
+			<div data-for="message" class="col-md-12 form-group">
+				<label for="email-form1-17"
+					class="form-control-label mbr-fonts-style display-7"
+					style="color: #2a3d2e !important;">Fecha fin</label> <input
+					type="datetime" th:field="*{endDate}" th:errorclass="fieldError"
+					data-form-field="Message" class="form-control display-7"></input>
+				<p th:if="${#fields.hasErrors('endDate')}"
+					style="color: red !important;">
+					<span th:errors="*{endDate}"></span>
+				</p>
+			</div>
+
+
+
+			<div data-for="message" class="col-md-12 form-group">
+				<div class="col-md-12 input-group-btn align-center">
+					<button name="save" type="submit"
+						class="btn btn-form btn-secondary display-4">Publicar</button>
+
+
+					<a href="/"
+						class="btn btn-warning-outline display-4"> Volver </a>
+				</div>
+
+
+
+			</div>
+		</form>
+
+
 
 	</div>
 

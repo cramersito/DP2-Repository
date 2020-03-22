@@ -1,5 +1,7 @@
 package com.DP2Spring.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,7 @@ import com.DP2Spring.model.Course;
 import com.DP2Spring.repository.CourseRepository;
 
 @Service
+@Transactional
 public class CourseService {
 
 	//Attributes
