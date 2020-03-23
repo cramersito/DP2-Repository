@@ -25,14 +25,17 @@ color: white;
       <li class="nav-item">
         <a class="nav-link" href="/">Inicio</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Publicar curso</a>
+      <li class="nav-item" sec:authorize="hasAuthority('CLERK')">
+        <a class="nav-link" href="/certificate/create">Publicar curso</a>
       </li>
       <li class="nav-item" sec:authorize="hasAuthority('CLERK')">
         <a class="nav-link" href="/transport/list">Transportes pendientes</a>
       </li>
       <li class="nav-item" sec:authorize="hasAuthority('OWNER')">
         <a class="nav-link" href="/pet/my-pets">Mis mascotas</a>
+      </li>
+       <li class="nav-item" sec:authorize="hasAuthority('OWNER')">
+        <a class="nav-link" href="/course/enroll/list">Cursos para inscribirse</a>
       </li>
       <li 	sec:authorize="isAnonymous()" class="nav-item">
         <a class="nav-link" href="/login">Iniciar sesion</a>

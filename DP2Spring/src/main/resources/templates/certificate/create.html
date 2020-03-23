@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{master-page/layout :: layout(~{::title}, ~{::div.content})}">
+<head>
+<title>Crear certificado para el curso en cuestión</title>
+</head>
+
+<body>
+	<div class="content">
+		<form th:action="@{/certificate/create}" id="myForm" th:object="${certificate}"
+			method="post">
+					<input type="hidden" th:field="*{id}" th:value="${certificate.id}"/>
+            		<input type="hidden" th:field="*{version}" th:value="${certificate.version}"/>
+            		
+			
+
+			<div data-for="message" class="col-md-12 form-group">
+				<label for="email-form1-17"
+					class="form-control-label mbr-fonts-style display-7"
+					style="color: #2a3d2e !important;">Entidad</label>
+				<input type="text"  th:field="*{entity}"
+					th:errorclass="fieldError" data-form-field="Message"
+					class="form-control display-7"/>
+				<p th:if="${#fields.hasErrors('entity')}"
+					style="color: red !important;">
+					<span th:errors="*{entity}"></span>
+				</p>
+			</div>
+
+
+			<div data-for="message" class="col-md-12 form-group">
+				<label for="email-form1-17"
+					class="form-control-label mbr-fonts-style display-7"
+					style="color: #2a3d2e !important;">Descripción</label> <textarea
+				 th:field="*{description}"
+					th:errorclass="fieldError" data-form-field="Message"
+					class="form-control display-7"></textarea>
+				<p th:if="${#fields.hasErrors('description')}"
+					style="color: red !important;">
+					<span th:errors="*{description}"></span>
+				</p>
+			</div>
+
+
+			
+
+
+
+			<div data-for="message" class="col-md-12 form-group">
+				<div class="col-md-12 input-group-btn align-center">
+					<button name="save" type="submit"
+						class="btn btn-form btn-secondary display-4">Asignar certificado al curso</button>
+
+
+					<a href="/"
+						class="btn btn-warning-outline display-4"> Volver </a>
+				</div>
+
+
+
+			</div>
+		</form>
+
+
+
+	</div>
+
+
+</body>
+</html>

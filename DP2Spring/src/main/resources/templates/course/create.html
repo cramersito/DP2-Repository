@@ -20,7 +20,7 @@
 				<label for="email-form1-17"
 					class="form-control-label mbr-fonts-style display-7"
 					style="color: #2a3d2e !important;">Descripcion</label>
-				<textarea type="text" th:field="*{description}"
+				<textarea  th:field="*{description}"
 					th:errorclass="fieldError" data-form-field="Message"
 					class="form-control display-7"></textarea>
 				<p th:if="${#fields.hasErrors('description')}"
@@ -48,7 +48,7 @@
 				<label for="email-form1-17"
 					class="form-control-label mbr-fonts-style display-7"
 					style="color: #2a3d2e !important;">Fecha inicio</label> <input
-					type="datetime" th:field="*{startDate}" th:errorclass="fieldError"
+					type="date" th:field="*{startDate}" th:errorclass="fieldError"
 					data-form-field="Message" class="form-control display-7"></input>
 				<p th:if="${#fields.hasErrors('startDate')}"
 					style="color: red !important;">
@@ -60,7 +60,7 @@
 				<label for="email-form1-17"
 					class="form-control-label mbr-fonts-style display-7"
 					style="color: #2a3d2e !important;">Fecha fin</label> <input
-					type="datetime" th:field="*{endDate}" th:errorclass="fieldError"
+					type="date" th:field="*{endDate}" th:errorclass="fieldError"
 					data-form-field="Message" class="form-control display-7"></input>
 				<p th:if="${#fields.hasErrors('endDate')}"
 					style="color: red !important;">

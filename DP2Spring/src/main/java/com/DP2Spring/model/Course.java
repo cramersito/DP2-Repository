@@ -36,12 +36,12 @@ private static final long serialVersionUID = 1L;
 	@NotBlank
 	private String description;
 	
-	@NotNull
+	//@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date startDate;
 	
-	@NotNull
+	//@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date endDate;

@@ -35,7 +35,10 @@ public class CertificateService {
 	
 	
 	
-	
-	
 	//Other methods
+	
+	public Certificate findOne(int id) {
+		
+		return this.certificateRepository.findById(id).get();
+	}
 }
