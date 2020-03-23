@@ -7,6 +7,16 @@
 
 <body>
 	<div class="content">
+	
+	        <script>
+            $(function () {
+                $("#startDate").datepicker({dateFormat: 'dd/mm/yy'});
+            });
+            $(function () {
+                $("#endDate").datepicker({dateFormat: 'dd/mm/yy'});
+            });
+        </script>
+        
 		<form th:action="@{/course/create}" id="myForm" th:object="${course}"
 			method="post">
 					<input type="hidden" th:field="*{id}" th:value="${course.id}"/>
@@ -48,7 +58,7 @@
 				<label for="email-form1-17"
 					class="form-control-label mbr-fonts-style display-7"
 					style="color: #2a3d2e !important;">Fecha inicio</label> <input
-					type="date" th:field="*{startDate}" th:errorclass="fieldError"
+					type="text" th:field="*{startDate}" th:errorclass="fieldError"
 					data-form-field="Message" class="form-control display-7"></input>
 				<p th:if="${#fields.hasErrors('startDate')}"
 					style="color: red !important;">
@@ -60,7 +70,7 @@
 				<label for="email-form1-17"
 					class="form-control-label mbr-fonts-style display-7"
 					style="color: #2a3d2e !important;">Fecha fin</label> <input
-					type="date" th:field="*{endDate}" th:errorclass="fieldError"
+					type="text" th:field="*{endDate}" th:errorclass="fieldError"
 					data-form-field="Message" class="form-control display-7"></input>
 				<p th:if="${#fields.hasErrors('endDate')}"
 					style="color: red !important;">

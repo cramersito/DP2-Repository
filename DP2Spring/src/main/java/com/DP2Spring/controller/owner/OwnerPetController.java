@@ -18,7 +18,7 @@ import com.DP2Spring.service.PetService;
 
 @Controller
 @RequestMapping("/pet")
-public class ClerkPetController {
+public class OwnerPetController {
 	
 	@Autowired
 	private OwnerService ownerService;
@@ -29,7 +29,7 @@ public class ClerkPetController {
 	//Controllers
 	
 		@GetMapping("/my-pets")
-		public ModelAndView create() {
+		public ModelAndView myPets() {
 			ModelAndView result = new ModelAndView("pet/my-pets");
 			
 			Owner principal=this.ownerService.findByPrincipal();

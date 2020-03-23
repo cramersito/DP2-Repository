@@ -74,15 +74,33 @@ public class Transport  extends DomainEntity{
 	
 	
 
-	@NotNull
+	//@NotNull
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	private Clerk clerk;
 	
 	@NotNull
-	@Valid
+	//@Valid
 	@OneToMany
 	private Collection<Pet> pets;
+
+	public Clerk getClerk() {
+		return clerk;
+	}
+
+	public void setClerk(Clerk clerk) {
+		this.clerk = clerk;
+	}
+
+	public Collection<Pet> getPets() {
+		return pets;
+	}
+
+	public void setPets(Collection<Pet> pets) {
+		this.pets = pets;
+	}
+	
+	
 	
 
 }

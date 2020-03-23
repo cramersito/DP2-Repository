@@ -23,6 +23,7 @@
             		<input type="hidden" th:field="*{version}" th:value="${transport.version}"/>
                     <input type="hidden" th:field="*{status}" th:value="${transport.status}"/>
                     
+                    <input type="hidden" th:field="*{clerk}" th:value="${principal}" sec:authorize="hasAuthority('CLERK')" />
                     
                     <div class="dragArea row">
                     
@@ -47,15 +48,34 @@
                         		<span th:errors="*{destination}"></span>
                     		</p>
                         </div>
-
+						<!-- <div class="col-md-4  form-group" data-for="name">
+                            <label  class="form-control-label mbr-fonts-style display-7" style="color: #2a3d2e !important;">Mis mascotas</label>
+		                    <select   th:field="*{pets}"   data-form-field="Name" required="required" class="form-control display-7"  multiple>
+		                      	<option th:each="m : ${mascotas}" th:value="${m.id.toString()}" th:field="*{pets}"  class="form-control-label  mbr-fonts-style display-7"  th:text="${m.nombre}" ></option>
+		
+		                    </select>
+		                    <p th:if="${#fields.hasErrors('pets')}" style="color: red !important;">
+		                        <span th:errors="*{pets}"></span>
+			                </p>
+                        </div>
+ -->
+ 
+					 <select  th:field="*{pets}" class="form-control" name="pets">
+					<option th:each="m : ${mascotas}"
+					
+					    th:value="${m.getId()}"
+					    th:text="${m.nombre.toString()}" />
+					    </select>
     
 
 		            <div data-for="message" class="col-md-12 form-group">
                         <div class="col-md-12 input-group-btn align-center">
-                        <button name="save" type="submit" class="btn btn-form btn-success display-4">
-        				Guardar
+                        <button name="transportar" type="submit" class="btn btn-form btn-success display-4" sec:authorize="hasAuthority('CLERK')">
+        				Transportar
                         </button>
-                        
+                        <button name="solicitarTransporte" type="submit" class="btn btn-form btn-success display-4" sec:authorize="hasAuthority('OWNER')">
+        				Solicitar transporte
+                        </button>
         
                         <a href="/transport/list"
                         class="btn btn-secondary">
