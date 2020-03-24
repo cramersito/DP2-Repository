@@ -88,9 +88,9 @@ CREATE TABLE `course` (
   `id` int NOT NULL,
   `version` int NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `end_date` datetime(6) DEFAULT NULL,
+  `end_date` datetime(6) NOT NULL,
   `price` double NOT NULL,
-  `start_date` datetime(6) DEFAULT NULL,
+  `start_date` datetime(6) NOT NULL,
   `certificate_id` int NOT NULL,
   `clerk_id` int NOT NULL,
   PRIMARY KEY (`id`),
@@ -222,7 +222,7 @@ DROP TABLE IF EXISTS `transport_pets`;
 CREATE TABLE `transport_pets` (
   `transport_id` int NOT NULL,
   `pets_id` int NOT NULL,
-  UNIQUE KEY `UK_9u0reckhjikil2m3pqlrs3t0d` (`pets_id`),
+  KEY `FKkn0vr9cwncoo71lpnwnj3yymg` (`pets_id`),
   KEY `FK27h047c1hjev50eaauw303wdl` (`transport_id`),
   CONSTRAINT `FK27h047c1hjev50eaauw303wdl` FOREIGN KEY (`transport_id`) REFERENCES `transport` (`id`),
   CONSTRAINT `FKkn0vr9cwncoo71lpnwnj3yymg` FOREIGN KEY (`pets_id`) REFERENCES `pet` (`id`)
@@ -271,4 +271,4 @@ CREATE TABLE `user_account_authorities` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-23 20:14:01
+-- Dump completed on 2020-03-24  9:48:04

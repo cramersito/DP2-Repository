@@ -102,4 +102,9 @@ public class CourseService {
 		
 		return result;
 	}
+	
+	public Collection<Course> findAll(){
+		
+		return this.courseRepository.findAll();
+	}
 }

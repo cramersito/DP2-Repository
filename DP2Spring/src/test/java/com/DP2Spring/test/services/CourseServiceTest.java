@@ -41,26 +41,33 @@ class CourseServiceTest {
 		Clerk clerk1 = this.clerkService.findOne(200);
 		Course course = new Course();
 		Certificate certificate = new Certificate();
-		int courses = this.courseService.getCoursesByClerk(200).size();
+		certificate.setDescription("Test cert");
+		certificate.setEntity("Testt");
+		int courses = this.courseService.findAll().size();
 		
 		course.setClerk(clerk1);
-		course.setCertificate(certificate);
+		
 		course.setDescription("Test positivo");
 		course.setPrice(12.0);
 		course.setStartDate(new Date(System.currentTimeMillis()-1));
-		course.setEndDate(new Date(System.currentTimeMillis()-1));
+		course.setEndDate(new Date(System.currentTimeMillis()+1));
 		
 		assertThat(course.getOwnersRegistered()).isNullOrEmpty();
 		
 		try {
+			this.certificateService.save(certificate);
+			
+			course.setCertificate(certificate);
 			
 			this.courseService.save(course);
 			
 		}catch(Throwable oops) {
+			System.out.println("=================================================");
 			System.out.println(oops.getMessage());
+			System.out.println("=================================================");
 		}
 		
-		//assertThat(this.courseService.getCoursesByClerk(200)).isEqualTo(courses+1);
+		//assertThat(this.courseService.getCoursesByClerk(200)).isEqualTo(courses);
 		
 		assertThat(course.getId()).isNotNull();
 		
