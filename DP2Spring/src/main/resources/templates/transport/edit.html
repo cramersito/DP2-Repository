@@ -21,15 +21,18 @@
 
  					<input type="hidden" th:field="*{id}" th:value="${transport.id}"/>
             		<input type="hidden" th:field="*{version}" th:value="${transport.version}"/>
-                    <input type="hidden" th:field="*{status}" th:value="${transport.status}"/>
+                    <input type="hidden" th:field="*{status}" th:value="${transport.status}" sec:authorize="hasAuthority('OWNER')"/>
+                    <input type="hidden" name="status" value="TRANSPORTED" sec:authorize="hasAuthority('CLERK')"/>
+                    <input type="hidden" th:field="*{origin}" th:value="${transport.origin}" sec:authorize="hasAuthority('CLERK')"/>
+                    <input type="hidden" th:field="*{destination}" th:value="${transport.destination}" sec:authorize="hasAuthority('CLERK')"/>
                     
-                    <input type="hidden" th:field="*{clerk}" th:value="${principal}" sec:authorize="hasAuthority('CLERK')" />
+                    
                     
                     <div class="dragArea row">
                     
                         <div data-for="message" class="col-md-12 form-group" sec:authorize="hasAuthority('CLERK')">
                          <label for="email-form1-17" class="form-control-label mbr-fonts-style display-7" style="color: #2a3d2e !important;">Compañia</label>
-                            <input type="text"  id="txtcompany1"  placeholder="Escribe una compañia" th:field="*{company}"  th:errorclass="fieldError" data-form-field="Message" class="form-control display-7" ></input>
+                            <input type="text"  id="txtcompany1"  placeholder="Escribe una compañia" th:field="*{company}"  th:errorclass="fieldError" data-form-field="Message" class="form-control display-7"  required></input>
                             <p th:if="${#fields.hasErrors('company')}" style="color: red !important;">
                         		<span th:errors="*{company}"></span>
                     		</p>
@@ -48,10 +51,10 @@
                         		<span th:errors="*{destination}"></span>
                     		</p>
                         </div>
-						 <div class="col-md-4  form-group" data-for="name">
+						 <div class="col-md-4  form-group" data-for="name" sec:authorize="hasAuthority('OWNER')">
                             <label  class="form-control-label mbr-fonts-style display-7" style="color: #2a3d2e !important;">Mis mascotas</label>
-		                    <select   th:field="*{pets}" name="pets"  data-form-field="Name" required="required" class="form-control display-7"  multiple>
-		                      	<option th:each="m : ${mascotas}" th:value="${m.id}" th:field="*{pets}"  class="form-control-label  mbr-fonts-style display-7"  th:text="${m.nombre}" ></option>
+		                    <select    name="mascotas"  data-form-field="Name" required="required" class="form-control display-7"  multiple>
+		                      	<option th:each="m : ${mascotas}" th:value="${m.id}"   class="form-control-label  mbr-fonts-style display-7"  th:text="${m.nombre}" ></option>
 		
 		                    </select>
 		                    <p th:if="${#fields.hasErrors('pets')}" style="color: red !important;">

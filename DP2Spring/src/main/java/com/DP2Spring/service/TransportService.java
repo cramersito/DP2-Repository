@@ -1,5 +1,6 @@
 package com.DP2Spring.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,7 @@ public class TransportService {
 
     // Supporting services
 
-    @Autowired
-    private ActorService actorService;
+
 
     @Autowired
     private OwnerService ownerService;
@@ -94,7 +94,7 @@ public class TransportService {
     
     
     public Transport solicitarTransporte(Transport transport,String pets){
-    	Collection<Pet> colPets= null;
+    	Collection<Pet> colPets= new ArrayList<Pet> ();
     	for (String s : pets.split(",")) {
     		
     		colPets.add(this.petService.myPet(Integer.parseInt(s)));
@@ -115,9 +115,16 @@ public class TransportService {
     }
     
     public Transport transportar(Transport transport){
+    	
+    	Transport t= this.findOne(transport.getId());
+    	
+		Clerk principal = this.clerkService.findByPrincipal();		
+		transport.setClerk(principal);
+		transport.setPets(t.getPets());
+		Assert.notNull(transport.getClerk() != null && transport != null,"No puede ser nulo");
         Assert.notNull(transport.getId() > 0, "La parcela debe existir");
         Assert.isTrue(transport.getPets().size() > 0, "Debe añadir una o más mascotas");
-       //controlar que son sus mascotas
+        Assert.isTrue(transport.getCompany()!= null && transport.getCompany() != "","No se ha añadido compañia de transporte");
         Assert.isTrue(transport.getStatus().equals("TRANSPORTED"), "Debe estar en estado pendiente");
 
         Transport result;
@@ -127,6 +134,17 @@ public class TransportService {
         return result;
 
     }
+
+
+
+	public Collection<Transport> transportsTransported() {
+        Collection<Transport> result;
+    	Owner principal = this.ownerService.findByPrincipal();
+    	Assert.notNull(principal,"Debe ser un clerk");
+        result = this.transportRepository.transportsTransported();
+        
+		return result;
+	}
     
     
 

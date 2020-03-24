@@ -2,19 +2,21 @@ package com.DP2Spring.controller;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.DP2Spring.model.Clerk;
-import com.DP2Spring.model.Course;
+
 import com.DP2Spring.model.Owner;
 import com.DP2Spring.model.Pet;
 import com.DP2Spring.model.Transport;
@@ -58,6 +60,17 @@ public class TransportController {
 		return result;
 		
 	}
+	@GetMapping("/myTransports")
+	public ModelAndView myTransports() {
+		ModelAndView result = new ModelAndView("transport/myTransports");
+		
+		Collection<Transport> transportes = this.transportService.transportsTransported();  
+		
+		result.addObject("transportes", transportes);
+		
+		return result;
+		
+	}
 	
 	// Create
 
@@ -81,6 +94,12 @@ public class TransportController {
 		
 		Transport transport = this.transportService.findOne(transportId);  
 		
+		if(this.actorService.isASpecificRole(this.actorService.findByPrincipal(), "CLERK")) {
+			Clerk principal = this.clerkService.findByPrincipal();
+			result.addObject("principal", principal);
+			
+		}
+		
 		result.addObject("transport", transport);
 		
 		return result;
@@ -90,7 +109,7 @@ public class TransportController {
 	
 
 	@PostMapping(value = "/edit", params = "solicitarTransporte")
-	public ModelAndView solicitarTransporte(Transport transport, final BindingResult binding, @PathParam("pets") String pets) {
+	public ModelAndView solicitarTransporte(@Valid Transport transport, final BindingResult binding, @PathParam("mascotas") String mascotas) {
 		ModelAndView result;
 
 
@@ -98,8 +117,8 @@ public class TransportController {
 			result = this.createEditModelAndView(transport);
 		} else {
 			try {
-				this.transportService.solicitarTransporte(transport,pets);
-				result = new ModelAndView("redirect:/");
+				this.transportService.solicitarTransporte(transport,mascotas);
+				result = new ModelAndView("redirect:/pet/my-pets");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(transport, "Ha ocurrido un error");
 			}
@@ -109,18 +128,18 @@ public class TransportController {
 	}
 	
 	@PostMapping(value = "/edit", params = "transportar")
-	public ModelAndView transportar(Transport transport, final BindingResult binding) {
+	public ModelAndView transportar(@ModelAttribute("transport") @Valid Transport t, final BindingResult binding) {
 		ModelAndView result;
 
 
 		if (binding.hasErrors()) {
-			result = this.createEditModelAndView(transport);
+			result = this.createEditModelAndView(t);
 		} else {
 			try {
-				this.transportService.transportar(transport);
-				result = new ModelAndView("redirect:/");
+				this.transportService.transportar(t);
+				result = new ModelAndView("redirect:/transport/list");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(transport, "Ha ocurrido un error");
+				result = this.createEditModelAndView(t, "Ha ocurrido un error");
 			}
 		}
 
@@ -147,11 +166,7 @@ public class TransportController {
 		result.addObject("transport", transport);
 		result.addObject("messageCode", messageCode);
 		
-		if(this.actorService.isASpecificRole(this.actorService.findByPrincipal(), "CLERK")) {
-			Clerk principal = this.clerkService.findByPrincipal();
-			result.addObject("principal", principal);
-			
-		}
+
 		
 		if(this.actorService.isASpecificRole(this.actorService.findByPrincipal(), "OWNER")) {
 			Owner owner = this.ownerService.findByPrincipal();

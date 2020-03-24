@@ -41,6 +41,9 @@ color: white;
       <li class="nav-item" sec:authorize="hasAuthority('OWNER')">
         <a class="nav-link" href="/owner/listMyCourses">Mis cursos</a>
       </li>
+      <li class="nav-item" sec:authorize="hasAuthority('OWNER')">
+        <a class="nav-link" href="/transport/myTransports">Transportes acabados</a>
+      </li>
       <li 	sec:authorize="isAnonymous()" class="nav-item">
         <a class="nav-link" href="/login">Iniciar sesion</a>
       </li> 

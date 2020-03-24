@@ -13,6 +13,9 @@ public interface TransportRepository extends JpaRepository<Transport,Integer> {
 
     @Query("select t from Transport t where t.status = 'PENDING'")
 	Collection<Transport> transportsPending();
+    
+    @Query("select t from Transport t where t.status = 'TRANSPORTED'")
+	Collection<Transport> transportsTransported();
 	
 	
 

@@ -18,7 +18,7 @@ public class Transport  extends DomainEntity{
 	private static final long serialVersionUID = 1L;
 	
 	// Attributes -----------------------------------
-	@NotBlank
+	//@NotBlank
 	private String company;
 	@NotBlank
 	private String origin;
