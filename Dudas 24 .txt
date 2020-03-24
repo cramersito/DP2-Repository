@@ -1,0 +1,38 @@
+Pruebas unitarias SERVICIO:
+1 opcion (normal):
+-
+2 opcion MOCK:
+-
+-
+
+Primero: me aseguro q funciona el metodo servicio 
+Segundo:  cuando ya funciona seguro 
+
+
+
+-Un assert por prueba , si hay varios assert en un mismo SUT eso quiere decir que estamos comprobando varias cosas
+-Solo un assert por test  , no es un if , aSSert es es quien die si esta bien o esta mal la prueba
+-Si hay varios q sea de la misma logica
+-Primero test de certificate save 
+-Luego otro de course save 
+-De los sets tambien metodo unit
+-Luego de cada test hago un stubs y otro mocks de esos.
+-Mirad unittesting adv para los mocks stubs
+-Mock: verificar que se llama al metodo al menos una vez
+-Stub simula llamada esperado lo que quiera
+-Luego si quieres uno mas complejo  el que ha hecho Carlos.
+
+-Hay que usar flush
+-Importar entitymanager persistance justo antes de asserThat , me creo la instancia arriba del metodo.
+-Repository test --> Hay que hacer un constructor con autowired en la clase si se usa mock como tiene carlos con repository;
+-
+
+
+
+
+TEST CONTROLADORES:
+-ERROR entitiymanager:
+
+-
+-
+-
