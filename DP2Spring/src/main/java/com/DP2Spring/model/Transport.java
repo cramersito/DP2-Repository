@@ -87,7 +87,7 @@ public class Transport  extends DomainEntity{
 		return clerk;
 	}
 
-	pubrlic void setClerk(Clerk clerk) {
+	public void setClerk(Clerk clerk) {
 		this.clerk = clerk;
 	}
 
