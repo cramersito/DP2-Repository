@@ -1,4 +1,4 @@
-package com.ispp.DP2Spring;
+package com.DP2Spring.test;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

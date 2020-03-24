@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{master-page/layout :: layout(~{::title}, ~{::div.content})}">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Cursos a los que estoy inscrito</title>
+</head>
+<body>
+
+	<div class="content container">
+
+
+		<h2>Cursos a los que estoy inscrito</h2>
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Descripción</th>
+					<th>Precio</th>
+					<th>Ver más</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="c : ${myCourses}">
+				
+					<td th:text="${c.description}"></td>
+					<td th:text="${c.price}"></td>
+					<td><a class="btn btn-success" th:href="@{~/course/display?courseId=} + ${c.id}" > Ver más</a></td>
+				</tr>
+				
+				
+
+			</tbody>
+		</table>
+		
+		
+	</div>
+
+
+</body>
+</html>

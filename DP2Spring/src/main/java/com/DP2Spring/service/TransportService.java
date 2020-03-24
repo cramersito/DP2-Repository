@@ -5,8 +5,6 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 
 import com.DP2Spring.model.Clerk;
 import com.DP2Spring.model.Owner;
@@ -34,8 +32,10 @@ public class TransportService {
     @Autowired
     private ClerkService clerkService;
 
+
     @Autowired
     private PetService petService;
+
     
     // Constructor
 

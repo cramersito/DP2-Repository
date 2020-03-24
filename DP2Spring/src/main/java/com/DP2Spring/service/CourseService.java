@@ -1,12 +1,13 @@
 package com.DP2Spring.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import com.DP2Spring.model.Certificate;
 import com.DP2Spring.model.Clerk;
@@ -27,6 +28,16 @@ public class CourseService {
 
 	@Autowired
 	private CertificateService certificateService;
+	
+	@Autowired
+	private OwnerService ownerService;
+	
+	//Testing approach
+	
+	@Autowired
+	public CourseService(CourseRepository courseRepository) {
+		this.courseRepository = courseRepository;
+	}
 
 	//CRUD Methods
 
@@ -45,32 +56,17 @@ public class CourseService {
 	}
 
 	public Course save(Course course) {
+			
+		Assert.isTrue(course.getStartDate().before(course.getEndDate()), "La fecha de inicio debe ser anterior a la fecha de fin.");
 
-
-		//TODO: ASSERTS
-		if(course.getId() == 0) {
-			course.setStartDate(new Date(System.currentTimeMillis()-1));
-			course.setEndDate(new Date(System.currentTimeMillis()-1));
-		}
+		
+		
 
 		return this.courseRepository.saveAndFlush(course);
 
 
 	}
 	
-	public Course saveEnroll(Course course) {
-
-
-		//TODO: ASSERTS
-		if(course.getId() == 0) {
-			course.setStartDate(new Date(System.currentTimeMillis()-1));
-			course.setEndDate(new Date(System.currentTimeMillis()-1));
-		}
-
-		return this.courseRepository.save(course);
-
-
-	}
 
 
 
@@ -78,10 +74,37 @@ public class CourseService {
 	//Other methods
 
 	public Collection<Course> getEnrollCourses(){
-		return this.courseRepository.getEnrollCourses();
+		
+		Collection<Course> courses =  this.courseRepository.getEnrollCourses();
+		Collection<Course> finalCourses = new ArrayList<Course>();
+		
+		for(Course c: courses) {
+			if(!c.getOwnersRegistered().contains(this.ownerService.findByPrincipal())) {
+				finalCourses.add(c);
+			}
+		}
+		
+		return finalCourses;
 	}
 
 	public Course findById(int id) {
 		return this.courseRepository.findById(id).get();
+	}
+	
+	public Collection<Integer> getCoursesByOwner(int ownerId) {
+		Collection<Integer> result = this.courseRepository.getCoursesByOwner(ownerId);
+		
+		return result;
+	}
+	
+	public Collection<Course> getCoursesByClerk(int clerkId) {
+		Collection<Course> result = this.courseRepository.getClerkCourses(clerkId);
+		
+		return result;
+	}
+	
+	public Collection<Course> findAll(){
+		
+		return this.courseRepository.findAll();
 	}
 }

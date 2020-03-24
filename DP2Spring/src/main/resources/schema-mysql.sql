@@ -111,7 +111,7 @@ DROP TABLE IF EXISTS `course_owners_registered`;
 CREATE TABLE `course_owners_registered` (
   `course_id` int NOT NULL,
   `owners_registered_id` int NOT NULL,
-  UNIQUE KEY `UK_lfuqjy7xil39fscae57pu19jt` (`owners_registered_id`),
+  KEY `FKdeoohltqub34yy772vn1i0gfa` (`owners_registered_id`),
   KEY `FKogmlxkv05m4usx94tylbgsr6b` (`course_id`),
   CONSTRAINT `FKdeoohltqub34yy772vn1i0gfa` FOREIGN KEY (`owners_registered_id`) REFERENCES `owner` (`id`),
   CONSTRAINT `FKogmlxkv05m4usx94tylbgsr6b` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)
@@ -178,16 +178,16 @@ DROP TABLE IF EXISTS `pet`;
 CREATE TABLE `pet` (
   `id` int NOT NULL,
   `version` int NOT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
   `birthday` datetime(6) NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
   `tipo` varchar(255) DEFAULT NULL,
-  `insurance_id` int DEFAULT NULL,
+  `law_id` int DEFAULT NULL,
   `owner_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK7roeeja6hj9cpfw1scke4xkns` (`insurance_id`),
+  KEY `FKn5qih87urhvjbxs2rfuv7ebk8` (`law_id`),
   KEY `FK7qfti9yba86tgfe9oobeqxfxg` (`owner_id`),
   CONSTRAINT `FK7qfti9yba86tgfe9oobeqxfxg` FOREIGN KEY (`owner_id`) REFERENCES `owner` (`id`),
-  CONSTRAINT `FK7roeeja6hj9cpfw1scke4xkns` FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (`id`)
+  CONSTRAINT `FKn5qih87urhvjbxs2rfuv7ebk8` FOREIGN KEY (`law_id`) REFERENCES `insurance` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -205,7 +205,7 @@ CREATE TABLE `transport` (
   `destination` varchar(255) DEFAULT NULL,
   `origin` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `clerk_id` int NOT NULL,
+  `clerk_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK80xby0rui7rii9sotvd439nyh` (`clerk_id`),
   CONSTRAINT `FK80xby0rui7rii9sotvd439nyh` FOREIGN KEY (`clerk_id`) REFERENCES `clerk` (`id`)
@@ -222,7 +222,7 @@ DROP TABLE IF EXISTS `transport_pets`;
 CREATE TABLE `transport_pets` (
   `transport_id` int NOT NULL,
   `pets_id` int NOT NULL,
-  UNIQUE KEY `UK_9u0reckhjikil2m3pqlrs3t0d` (`pets_id`),
+  KEY `FKkn0vr9cwncoo71lpnwnj3yymg` (`pets_id`),
   KEY `FK27h047c1hjev50eaauw303wdl` (`transport_id`),
   CONSTRAINT `FK27h047c1hjev50eaauw303wdl` FOREIGN KEY (`transport_id`) REFERENCES `transport` (`id`),
   CONSTRAINT `FKkn0vr9cwncoo71lpnwnj3yymg` FOREIGN KEY (`pets_id`) REFERENCES `pet` (`id`)
@@ -271,4 +271,4 @@ CREATE TABLE `user_account_authorities` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-20 19:41:12
+-- Dump completed on 2020-03-24  9:48:04

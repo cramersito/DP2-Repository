@@ -3,9 +3,11 @@ package com.DP2Spring.model;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -15,7 +17,6 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -36,12 +37,12 @@ private static final long serialVersionUID = 1L;
 	@NotBlank
 	private String description;
 	
-	//@NotNull
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date startDate;
 	
-	//@NotNull
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date endDate;
@@ -100,7 +101,7 @@ private static final long serialVersionUID = 1L;
 	
 
 	//@Valid
-	@OneToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	private Collection<Owner> OwnersRegistered;
 
 	public Clerk getClerk() {

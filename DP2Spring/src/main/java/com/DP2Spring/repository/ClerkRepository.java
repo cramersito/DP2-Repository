@@ -11,4 +11,6 @@ public interface ClerkRepository extends JpaRepository<Clerk,Integer> {
 
     @Query("select c from Clerk c where c.userAccount.username = ?1")
     Clerk findClerkByUsername(String username);
+    
+    
 }

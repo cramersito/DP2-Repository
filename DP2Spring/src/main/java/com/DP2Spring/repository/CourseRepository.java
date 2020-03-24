@@ -13,4 +13,13 @@ public interface CourseRepository extends JpaRepository<Course,Integer> {
 
 	@Query("select c from Course c where c.startDate <= CURRENT_DATE")
 	Collection<Course> getEnrollCourses();
+	
+	
+	@Query(value = "select course_id c from dp2_spring.course_owners_registered c where owners_registered_id= ?1" , nativeQuery = true)
+	Collection<Integer> getCoursesByOwner(int ownerId);
+	
+	
+	@Query("select c from Course c where c.clerk.id = ?1")
+	Collection<Course> getClerkCourses(int clerkId);
+	
 }
