@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Date;
 
+import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -35,6 +37,9 @@ class CourseServiceTest {
 	@Autowired
 	protected CertificateService certificateService;
 	
+	@Autowired
+	private EntityManager entityManager;
+	
 	@Test
 	@Transactional
 	public void shouldPersistCourse() {
@@ -55,6 +60,9 @@ class CourseServiceTest {
 		assertThat(course.getOwnersRegistered()).isNullOrEmpty();
 		
 		try {
+			
+			//Check first certificate save
+			
 			this.certificateService.save(certificate);
 			
 			course.setCertificate(certificate);
@@ -67,7 +75,9 @@ class CourseServiceTest {
 			System.out.println("=================================================");
 		}
 		
-		//assertThat(this.courseService.getCoursesByClerk(200)).isEqualTo(courses);
+		
+		
+		entityManager.flush();
 		
 		assertThat(course.getId()).isNotNull();
 		

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.DP2Spring.model.Certificate;
 import com.DP2Spring.model.Course;
 import com.DP2Spring.service.CertificateService;
+import com.DP2Spring.service.ClerkService;
 import com.DP2Spring.service.CourseService;
 
 @Controller
@@ -32,6 +33,9 @@ public class CourseController {
 	@Autowired
 	CertificateService certificateService;
 	
+	@Autowired
+	ClerkService clerkService;
+	
 	
 	//Controllers
 	
@@ -39,7 +43,10 @@ public class CourseController {
 	public ModelAndView create(@RequestParam int certificateId) {
 		ModelAndView result = new ModelAndView("course/create");
 		
-		Course course = this.courseService.create();
+		Course course = new Course();
+		
+		course.setClerk(this.clerkService.findByPrincipal());
+		
 		
 		Certificate certificate = this.certificateService.findOne(certificateId);
 		
