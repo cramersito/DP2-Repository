@@ -47,13 +47,13 @@ public class OwnerService {
 		
 		Assert.isTrue(!course.getOwnersRegistered().contains(principal), "Ya estás inscrito a este curso.");
 
-		Collection<Owner> enrolled = new ArrayList<Owner>();
+		Collection<Owner> enrolled = course.getOwnersRegistered();
 		enrolled.add(principal);
 		
-		course.setOwnersRegistered(enrolled);
+		
 		this.courseService.save(course);
 
-
+		
 
 
 	}

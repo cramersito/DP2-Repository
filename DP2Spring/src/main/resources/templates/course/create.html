@@ -77,6 +77,11 @@
 					<span th:errors="*{endDate}"></span>
 				</p>
 			</div>
+			
+			
+			 <div class="col-md-12 form-group"  th:if="${errorMessage != ''}">
+		                <p th:text="${errorMessage}" style="color: red !important;"></p>
+		            </div>
 
 
 

@@ -1,4 +1,4 @@
-package com.ispp.DP2Spring.services;
+package com.DP2Spring.test.services;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;

@@ -78,10 +78,11 @@ public class CourseController {
 			try {
 				this.courseService.save(course);
 				
-				result = new ModelAndView("redirect:/");
+				result = new ModelAndView("redirect:/clerk/listCourses");
 			}catch(Throwable oops) {
 				result = new ModelAndView("/course/create");
-
+				
+				result.addObject("errorMessage", oops.getMessage());
 			}
 		}
 		
