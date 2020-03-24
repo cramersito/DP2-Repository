@@ -42,6 +42,12 @@ public class PetService {
         return result;
     }
     
+    public Pet myPet(int petId) {
+    	Pet res= this.PetRepository.myPet(petId);
+    	return res;
+    	
+    }
+    
     
 
 }

@@ -2,6 +2,8 @@ package com.DP2Spring.controller;
 
 import java.util.Collection;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -88,18 +90,15 @@ public class TransportController {
 	
 
 	@PostMapping(value = "/edit", params = "solicitarTransporte")
-	public ModelAndView solicitarTransporte(Transport transport, final BindingResult binding) {
+	public ModelAndView solicitarTransporte(Transport transport, final BindingResult binding, @PathParam("pets") String pets) {
 		ModelAndView result;
-		//Transport t;
 
-
-		//t = this.transportService.reconstruct(transport, binding);
 
 		if (binding.hasErrors()) {
 			result = this.createEditModelAndView(transport);
 		} else {
 			try {
-				this.transportService.solicitarTransporte(transport);
+				this.transportService.solicitarTransporte(transport,pets);
 				result = new ModelAndView("redirect:/");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(transport, "Ha ocurrido un error");
@@ -112,10 +111,7 @@ public class TransportController {
 	@PostMapping(value = "/edit", params = "transportar")
 	public ModelAndView transportar(Transport transport, final BindingResult binding) {
 		ModelAndView result;
-		//Transport t;
 
-
-		//t = this.transportService.reconstruct(transport, binding);
 
 		if (binding.hasErrors()) {
 			result = this.createEditModelAndView(transport);

@@ -48,24 +48,19 @@
                         		<span th:errors="*{destination}"></span>
                     		</p>
                         </div>
-						<!-- <div class="col-md-4  form-group" data-for="name">
+						 <div class="col-md-4  form-group" data-for="name">
                             <label  class="form-control-label mbr-fonts-style display-7" style="color: #2a3d2e !important;">Mis mascotas</label>
-		                    <select   th:field="*{pets}"   data-form-field="Name" required="required" class="form-control display-7"  multiple>
-		                      	<option th:each="m : ${mascotas}" th:value="${m.id.toString()}" th:field="*{pets}"  class="form-control-label  mbr-fonts-style display-7"  th:text="${m.nombre}" ></option>
+		                    <select   th:field="*{pets}" name="pets"  data-form-field="Name" required="required" class="form-control display-7"  multiple>
+		                      	<option th:each="m : ${mascotas}" th:value="${m.id}" th:field="*{pets}"  class="form-control-label  mbr-fonts-style display-7"  th:text="${m.nombre}" ></option>
 		
 		                    </select>
 		                    <p th:if="${#fields.hasErrors('pets')}" style="color: red !important;">
 		                        <span th:errors="*{pets}"></span>
 			                </p>
                         </div>
- -->
+
  
-					 <select  th:field="*{pets}" class="form-control" name="pets">
-					<option th:each="m : ${mascotas}"
-					
-					    th:value="${m.getId()}"
-					    th:text="${m.nombre.toString()}" />
-					    </select>
+
     
 
 		            <div data-for="message" class="col-md-12 form-group">

@@ -35,7 +35,7 @@ public class TransportService {
     private ClerkService clerkService;
 
     @Autowired
-    private Validator validator;
+    private PetService petService;
     
     // Constructor
 
@@ -93,7 +93,14 @@ public class TransportService {
     }
     
     
-    public Transport solicitarTransporte(Transport transport){
+    public Transport solicitarTransporte(Transport transport,String pets){
+    	Collection<Pet> colPets= null;
+    	for (String s : pets.split(",")) {
+    		
+    		colPets.add(this.petService.myPet(Integer.parseInt(s)));
+  
+    	}
+    	transport.setPets(colPets);
         Assert.notNull(transport, "La parcela debe existir");
         Assert.isTrue(transport.getPets().size() > 0, "Debe añadir una o más mascotas");
        //controlar que son sus mascotas
@@ -122,32 +129,7 @@ public class TransportService {
     }
     
     
-    // Other business methods
 
-  /*  public Transport reconstruct(final Transport transport, final BindingResult binding) {
-    	Transport result, stored;
-
-		if (transport.getId() == 0)
-			result = this.create();
-		else {
-			stored = this.findOne(transport.getId());
-
-			result = new Transport();
-			result.setId(stored.getId());
-            result.setVersion(stored.getVersion());
-            result.setPets(stored.getPets());
-            result.setStatus(stored.getStatus().trim());
-            result.
-            result.setArgumented(stored.isArgumented());
-        }
-       
-        result.setTitle(transport.getTitle().trim());
-
-
-		this.validator.validate(result, binding);
-
-		return result;
-	}*/
     
 
 }

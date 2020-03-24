@@ -79,7 +79,7 @@ public class Transport  extends DomainEntity{
 	@ManyToOne(optional = true)
 	private Clerk clerk;
 	
-	@NotNull
+	//@NotNull
 	//@Valid
 	@OneToMany
 	private Collection<Pet> pets;
