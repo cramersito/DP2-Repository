@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.DP2Spring.model.Certificate;
 import com.DP2Spring.model.Course;
 import com.DP2Spring.service.CertificateService;
-import com.DP2Spring.service.ClerkService;
 import com.DP2Spring.service.CourseService;
 
 @Controller
@@ -28,8 +27,7 @@ public class CourseController {
 	@Autowired
 	private CourseService courseService;
 	
-	@Autowired
-	private ClerkService clerkService;
+
 	
 	@Autowired
 	CertificateService certificateService;
