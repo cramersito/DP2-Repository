@@ -116,7 +116,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `transport` WRITE;
 /*!40000 ALTER TABLE `transport` DISABLE KEYS */;
-INSERT INTO `transport` VALUES (500,0,null,'Madrid','Rota','PENDING',200),(501,0,'SEUR','Madrid','Rota','TRANSPORTED',200),(502,0,'SEUR','Madrid','Rota','PENDING',200),(503,0,null,'Madrid','Rota','PENDING',201),(504,0,'SEUR','Madrid','Rota','TRANSPORTED',202),(505,0,null,'Madrid','Rota','PENDING',202);
+INSERT INTO `transport` VALUES (500,0,null,'Madrid','Rota','PENDING',null),(501,0,'SEUR','Sevilla','Lebrija','TRANSPORTED',200),(502,0,null,'Utrera','Sanchez Perrier 6','PENDING',null),(503,0,null,'Plaza españa','Wizink center','PENDING',null),(504,0,'SEUR','Rotonda beca','Puente del dragón','TRANSPORTED',202),(505,0,null,'Mairena','Carmona','PENDING',null);
 /*!40000 ALTER TABLE `transport` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,7 +126,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `transport_pets` WRITE;
 /*!40000 ALTER TABLE `transport_pets` DISABLE KEYS */;
-INSERT INTO `transport_pets` VALUES (500,80),(500,81),(501,82),(502,83),(503,84);
+INSERT INTO `transport_pets` VALUES (500,80),(500,81),(501,82),(502,83),(503,84),(504,84),(505,84);
 /*!40000 ALTER TABLE `transport_pets` ENABLE KEYS */;
 UNLOCK TABLES;
 
