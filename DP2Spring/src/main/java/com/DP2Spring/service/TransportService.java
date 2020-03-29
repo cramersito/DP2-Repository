@@ -11,6 +11,7 @@ import com.DP2Spring.model.Clerk;
 import com.DP2Spring.model.Owner;
 import com.DP2Spring.model.Pet;
 import com.DP2Spring.model.Transport;
+
 import com.DP2Spring.repository.TransportRepository;
 
 @Service
@@ -37,13 +38,14 @@ public class TransportService {
     private PetService petService;
 
     
-    // Constructor
-
-    public TransportService(){
-        super();
+	//Testing approach
+	@Autowired
+    public TransportService(TransportRepository transportRepository){
+		this.transportRepository = transportRepository;
     }
 
-    
+	//Testing approach
+  
 
     //Transportes pendientes
     
@@ -95,15 +97,19 @@ public class TransportService {
     
     public Transport solicitarTransporte(Transport transport,String pets){
     	Collection<Pet> colPets= new ArrayList<Pet> ();
+    	
+        Owner principal = this.ownerService.findByPrincipal();   
+    	Assert.notNull(principal, "La parcela debe existir");
+    	
     	for (String s : pets.split(",")) {
-    		
-    		colPets.add(this.petService.myPet(Integer.parseInt(s)));
-  
+    		Pet pet=this.petService.myPet(Integer.parseInt(s));
+    		colPets.add(pet);
+    	    Assert.isTrue(this.petService.findPetsByOwnerId(principal.getId()).contains(pet), "No es tu mascota");
     	}
+    		
     	transport.setPets(colPets);
         Assert.notNull(transport, "La parcela debe existir");
-        Assert.isTrue(transport.getPets().size() > 0, "Debe añadir una o más mascotas");
-       //controlar que son sus mascotas
+        Assert.isTrue(transport.getPets().size() > 0, "Debe añadir una o más mascotas"); 
         Assert.isTrue(transport.getStatus().equals("PENDING"), "Debe estar en estado pendiente");
 
         Transport result;

@@ -1,6 +1,7 @@
 package com.DP2Spring.test.services;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collection;
@@ -10,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.validation.ConstraintViolation;
 
 import org.aspectj.util.IStructureModel;
+import org.hibernate.hql.internal.ast.tree.ExpectedTypeAwareNode;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.Validator;
@@ -166,9 +169,21 @@ public class TransportServiceTest {
 		Transport t = this.transportService.create();
 		t.setOrigin("Utrera");
 		t.setDestination("Lebrija");
-		Transport tSolicitado = this.transportService.solicitarTransporte(t,null);
-		entityManager.flush();
-		Assert.isTrue(tSolicitado.getId() > 0,"Transporte no creado ");
+
+		Assertions.assertThrows( NullPointerException.class, ()-> this.transportService.solicitarTransporte(t,null));
+		
+	}
+	//TEST: solicitarTransporte --- NEGATIVO
+	
+	@Test
+	@WithMockUser("owner1")
+	@Transactional
+	public void solicitarTransporteNeg2() {
+		Transport t = this.transportService.create();
+		t.setOrigin(null);
+		t.setDestination(null);
+
+		Assertions.assertThrows( NullPointerException.class, ()-> this.transportService.solicitarTransporte(t,null));
 		
 	}
 	
@@ -187,17 +202,32 @@ public class TransportServiceTest {
 		
 	}
 	
-	//TEST: transportar
+	//TEST: transportar --- POSITIVO
 	
-/*	@Test
-	@WithMockUser("owner1")
+	@Test
+	@WithMockUser("clerk1")
 	@Transactional
-	public void transportar() {
-		Transport t = this.transportService.transportar();
-		Assert.isTrue(t.getStatus()=="PENDING","Transporte no creado correctamente");
+	public void transportarPos() {
+		
+		Transport t = this.transportService.findOne(500);
+		t.setCompany("SEUR");
+		t.setStatus("TRANSPORTED");
+		Transport tTransport= this.transportService.transportar(t);
+		Assert.isTrue(tTransport != null,"Transporte no creado correctamente");
 		
 	}
-	*/
+	//TEST: transportar --- NEGATIVO
+	
+	@Test
+	@WithMockUser("clerk1")
+	@Transactional
+	public void transportarNegNull() {
+		
+		Transport t = this.transportService.findOne(500);
+		Assertions.assertThrows(IllegalArgumentException.class,()->this.transportService.transportar(t),"Se ha transportado");
+		
+	}
+
 
 	
 }

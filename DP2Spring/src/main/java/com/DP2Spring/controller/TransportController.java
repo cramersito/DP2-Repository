@@ -108,7 +108,7 @@ public class TransportController {
 	
 	
 
-	@PostMapping(value = "/edit", params = "solicitarTransporte")
+	@PostMapping(value = "/edit/solicitarTransporte")
 	public ModelAndView solicitarTransporte(@Valid Transport transport, final BindingResult binding, @PathParam("mascotas") String mascotas) {
 		ModelAndView result;
 
@@ -127,7 +127,7 @@ public class TransportController {
 		return result;
 	}
 	
-	@PostMapping(value = "/edit", params = "transportar")
+	@PostMapping(value = "/edit/transportar")
 	public ModelAndView transportar(@ModelAttribute("transport") @Valid Transport t, final BindingResult binding) {
 		ModelAndView result;
 
