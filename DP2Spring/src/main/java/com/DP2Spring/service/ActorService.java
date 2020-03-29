@@ -42,66 +42,14 @@ public class ActorService {
 
     // CRUD Methods ------------------------------------
     public Actor findOne(int actorId) {
-    	Actor principal, result;
-    	Optional<Actor> optionalActor;
-    	boolean isACLERK, isRoleActor, isAOwner, isMyProfile;
+    	Actor result = this.actorRepository.findById(actorId).get();
     	
-    	principal = this.findByPrincipal();
     	
-    	Assert.isTrue(!principal.getUserAccount().getIsBanned(), "Usuario baneado");
-    	
-    	optionalActor = this.actorRepository.findById(actorId);
-    	
-    	result = optionalActor.orElse(principal);
-    	
-    	isMyProfile = principal.getId() == result.getId();
-    	
-    	isAOwner = this.isASpecificRole(principal, Authority.OWNER);
-    	isACLERK = this.isASpecificRole(principal, Authority.CLERK);
-    	
-    	if (isAOwner && !isMyProfile) {
-    		isRoleActor = this.isASpecificRole(result, Authority.CLERK);
-    		
-    		Assert.isTrue(isRoleActor, "Un arrendatario no puede acceder a info de otro arrendatario");
-    	} else if (isACLERK && !isMyProfile) {
-    		isRoleActor = this.isASpecificRole(result, Authority.OWNER);
-  
-    		Assert.isTrue(isRoleActor, "Un propietario no puede acceder a info de otro propietario");
-    	}
     	
     	return result;
     }
     
-    // Other business methods
-    public void ban(Actor actor) {
-    	Assert.notNull(actor, "Actor desconocido");
-    	Assert.isTrue(!actor.getUserAccount().getIsBanned(), "El actor ya esta baneado");
-    	Assert.isTrue(this.findByPrincipal() instanceof Administrator, "Accion realizable por un admin");
-    	
-    	UserAccount userAccount;
-    	
-    	userAccount = actor.getUserAccount();
-    	
-    	userAccount.setIsBanned(true);
-    	this.actorRepository.flush();
-    	
-    	Assert.isTrue(actor.getUserAccount().getIsBanned(), "Banear actor");
-    }
-    
-    public void unBan(Actor actor) {
-    	Assert.notNull(actor, "Actor desconocido");
-    	Assert.isTrue(actor.getUserAccount().getIsBanned(), "El actor ya esta baneado");
-    	Assert.isTrue(this.findByPrincipal() instanceof Administrator, "Accion realizable por un admin");
-    	
-    	UserAccount userAccount;
-    	
-    	userAccount = actor.getUserAccount();
-    	
-    	userAccount.setIsBanned(false);
-    	this.actorRepository.flush();
-    	
-    	Assert.isTrue(!actor.getUserAccount().getIsBanned(), "Desbanear actor");
-    }
+   
     
     public Actor findByPrincipal(){
 		Actor result;

@@ -26,44 +26,6 @@ public class ActorAdministratorController {
 		super();
 	}
 	
-	@GetMapping(value = "/ban")
-	public ModelAndView ban(@RequestParam final int actorId) {
-		ModelAndView result;
-		Actor actor;
-		
-		try {
-			actor = this.actorService.findOne(actorId);
-			
-			this.actorService.ban(actor);
-			
-			result = new ModelAndView("redirect:/actor/display?actorId=" + actorId);
-		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:/miscellaneous/error");
-			
-			log.info("Algo salio mal al banear un actor.");
-		}
-
-		return result;
-	}
 	
-	@GetMapping(value = "/unban")
-	public ModelAndView unBan(@RequestParam final int actorId) {
-		ModelAndView result;
-		Actor actor;
-		
-		try {
-			actor = this.actorService.findOne(actorId);
-			
-			this.actorService.unBan(actor);
-			
-			result = new ModelAndView("redirect:/actor/display?actorId=" + actorId);
-		} catch (final Throwable oops) {
-			result = new ModelAndView("redirect:/miscellaneous/error");
-			
-			log.info("Algo salio mal al banear un actor.");
-		}
-
-		return result;
-	}
 	
 }
