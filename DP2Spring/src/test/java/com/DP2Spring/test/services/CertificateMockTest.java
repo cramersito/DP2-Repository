@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -31,34 +32,19 @@ public class CertificateMockTest {
 		certificateService = new CertificateService(certificateRepository);
     }
 	
-	/*
-	 * @Test
-    void shouldFindVets() {
-        Vet sampleVet = new Vet();
-        sampleVet.setLastName("Douglas");
-        Collection<Vet> sampleVets = new ArrayList<Vet>();
-        sampleVets.add(sampleVet);
-        when(vetRepository.findAll()).thenReturn(sampleVets);
-
-        Collection<Vet> vets = this.vetService.findVets();
-
-        assertThat(vets).hasSize(1);
-        Vet vet = vets.iterator().next();
-        assertThat(vet.getLastName()).isEqualTo("Douglas");
-        assertThat(vet.getNrOfSpecialties()).isEqualTo(0);
-    }
-	 */
 	
-	void shouldFindCertificates() {
-		Certificate cer = new Certificate();
-		cer.setDescription("sample");
-		cer.setEntity("sample");
-		
-		Collection<Certificate> sample = new ArrayList<Certificate>();
-		
-		sample.add(cer);
-		
-		when(certificateRepository.findAll()).thenReturn((List<Certificate>) sample);
-	}
+	
+//	@Test
+//	void shouldFindCertificates() {
+//		Certificate cer = new Certificate();
+//		cer.setDescription("sample");
+//		cer.setEntity("sample");
+//		
+//		Collection<Certificate> sample = new ArrayList<Certificate>();
+//		
+//		sample.add(cer);
+//		
+//		when(certificateRepository.findAll()).thenReturn(sample);
+//	}
 
 }
