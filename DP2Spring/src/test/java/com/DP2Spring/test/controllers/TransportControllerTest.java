@@ -95,7 +95,6 @@ class TransportControllerTest {
 	
 	mockMvc.perform(get("/transport/list")).andExpect(status().isOk()).andExpect(view().name("transport/list"));
 	
-	//Mockito.when(transportService.transportsPending().size()).thenReturn(4);
 	
 	verify(transportService).transportsPending();
 	
@@ -105,7 +104,9 @@ class TransportControllerTest {
     @Test
     void transportesRealizados() throws Exception {
 	
-	mockMvc.perform(get("/transport/myTransports")).andExpect(status().isOk()).andExpect(view().name("transport/myTransports"));
+	mockMvc.perform(get("/transport/myTransports"))
+	.andExpect(status().isOk())
+	.andExpect(view().name("transport/myTransports"));
 	
 	verify(transportService).transportsTransported();
 	
@@ -115,23 +116,20 @@ class TransportControllerTest {
     @Test
     void controladorErroneo() throws Exception {
 	
-	mockMvc.perform(get("/transport/listTEST")).andExpect(status().is4xxClientError());
+	mockMvc.perform(get("/transport/listTEST"))
+	.andExpect(status()
+			.is4xxClientError());
 	
 }
 	
-	@WithMockUser(username = "owner1", authorities = {"OWNER"})
-	@Disabled
-    @Test
-    void create() throws Exception {
-	
-	mockMvc.perform(get("/transport/create")).andExpect(status().isOk()).andExpect(view().name("transport/edit"));
-	
-}
+
 	@WithMockUser(username = "clerk1", authorities = {"CLERK"})
 	@Test
 	void editViewTransport() throws Exception{
-		mockMvc.perform(get("/transport/edit?transportId="+TEST_TRANSPORT_ID)).andExpect(status().isOk())
-		.andExpect(view().name("transport/edit")).andExpect(model().attributeExists("transport"));
+		mockMvc.perform(get("/transport/edit?transportId="+TEST_TRANSPORT_ID))
+		.andExpect(status().isOk())
+		.andExpect(view().name("transport/edit"))
+		.andExpect(model().attributeExists("transport"));
 		
 		
 	}
@@ -146,6 +144,22 @@ class TransportControllerTest {
 				.param("status", "TRANSPORTED")
 				.param("origin", "Rota")
 				.param("destination", "Sevilla")
+				.param("company", "SEUR"))		
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/transport/list"));
+		
+		
+	}
+	
+	@WithMockUser(username = "clerk1", authorities = {"CLERK"})
+	@Test
+	void transportarPosWithSetUp() throws Exception {
+		mockMvc.perform(post("/transport/edit/transportar")
+				.with(csrf())
+				.param("id", Integer.toString(tr.getId()))
+				.param("status", "TRANSPORTED")
+				.param("origin", tr.getOrigin())
+				.param("destination", tr.getDestination())
 				.param("company", "SEUR"))		
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/transport/list"));

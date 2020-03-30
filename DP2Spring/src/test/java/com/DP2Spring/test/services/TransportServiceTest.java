@@ -9,12 +9,18 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
 
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.util.IStructureModel;
 import org.hibernate.hql.internal.ast.tree.ExpectedTypeAwareNode;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -51,19 +57,24 @@ public class TransportServiceTest {
 	
 	@Autowired
 	private EntityManager entityManager;
+
 	
-	//@Autowired
-	//private ValidatorTests validatorTests;
-	
-	//@MockBean
-	//private Validator validate;
+
 	
 	//TEST: findOne()
-	@Test
+
 	@Transactional
-	public void findOne() {
-		Transport t = this.transportService.findOne(500);
-		assertNotNull(t,"El transporte existe.");
+	@ParameterizedTest
+	@ValueSource(ints = { 500 ,501 ,502, 0 })
+	public void findOne(int transportId) {
+		
+		if(transportId > 0) {
+			Transport t = this.transportService.findOne(500);
+			assertNotNull(t,"El transporte existe.");
+		}else {
+			assertThrows(IllegalArgumentException.class, ()-> this.transportService.findOne(transportId),"No ha saltado la excepción esperada");
+		}
+
 		
 	}
 	
@@ -116,39 +127,7 @@ public class TransportServiceTest {
 		}
 	}
 	
-	//TEST: sets Transport
-	
-/*	@Test
-	@WithMockUser("clerk1")
-	@Transactional
-	public void setTransportCorrect() {
-		Transport t = this.transportService.findOne(500);
-		t.setCompany("DHL");
-		t.setClerk(this.clerkService.findByPrincipal());
-		Set<ConstraintViolation<Transport>> erroresValidacion =this.validate.validate(t);
-		Assert.isTrue(erroresValidacion.isEmpty(), "Se cumple las validaciones del modelo");
-		
-		
-	}*/
-	
-	//TEST: sets Transport
-	
-	/*@Test
-	@WithMockUser("clerk1")
-	@Transactional
-	public void setTransportInCorrect() {
-		Transport t = this.transportService.findOne(500);
-		t.setStatus("ESTADOINVENTADO");
-		
-		Validator validator = (Validator) this.validatorTests.createValidator();
-		Set<ConstraintViolation<Transport>> constraintViolations =
-		this.validatorTests.validate(t);
-		//Set<ConstraintViolation<Transport>> erroresValidacion =this.validate.validate(t);
-		//Assert.isTrue(!erroresValidacion.isEmpty(), "Se cumple las validaciones del modelo");
-		
-		
-	}
-	*/
+
 	//TEST: create()
 	@Test
 	@WithMockUser("owner1")
