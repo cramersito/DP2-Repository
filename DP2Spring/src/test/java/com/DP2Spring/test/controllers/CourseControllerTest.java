@@ -1,7 +1,9 @@
 package com.DP2Spring.test.controllers;
 
 import static org.mockito.BDDMockito.given;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -33,39 +35,132 @@ excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classe
 excludeAutoConfiguration = SecurityConfig.class)
 @OverrideAutoConfiguration(enabled=true)
 class CourseControllerTest {
-	
+
 	@MockBean
 	private CourseService courseService;
-	
+
 	@MockBean
 	private ClerkService clerkService;
-	
+
 	@MockBean
 	private CertificateService certificateService;
-	
+
 	@Autowired
 	private MockMvc mockMvc;
-	
-	
+
+
+	private Course c;
+
 	@BeforeEach
 	void setUp() {
-		
-		given(this.clerkService.findOne(200)).willReturn(new Clerk());
-		given(this.courseService.findById(400)).willReturn(new Course());
-		given(this.certificateService.findOne(50)).willReturn(new Certificate());
-		
-		
+
+
+
 	}
-	
+
 	@WithMockUser(username = "clerk1", authorities = {"CLERK"})
 	@Test
 	void testCreateCourse() throws Exception{
 		mockMvc.perform(get("/course/create?certificateId=50")).andExpect(status().isOk())
 		.andExpect(view().name("course/create")).andExpect(model().attributeExists("course"));
-		
-		
+
+
 	}
-	
-	
+
+	@WithMockUser(username = "clerk1", authorities = {"CLERK"})
+	@Test
+	void testCreateCourseSuccess() throws Exception{
+
+		mockMvc.perform(post("/course/createCourse")
+				.with(csrf())
+				.param("price", "10.99")
+				.param("description", "Description")
+				.param("startDate", "22/09/2015")
+				.param("endDate", "22/09/2016")
+				.param("certificate", "50")
+				.param("clerk", "200"))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(view().name("redirect:/clerk/listCourses"));
+
+
+	}
+
+
+	//Certificado nulo
+	@WithMockUser(username = "clerk1", authorities = {"CLERK"})
+	@Test
+	void testCreateCourseNoSuccess() throws Exception{
+
+		mockMvc.perform(post("/course/createCourse")
+				.with(csrf())
+				.param("price", "10.99")
+				.param("description", "Description")
+				.param("startDate", "22/09/2015")
+				.param("endDate", "22/09/2016")
+				.param("clerk", "200"))
+		.andExpect(model().attributeHasErrors("course"))
+		.andExpect(model().attributeHasFieldErrors("course", "certificate"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("/course/create"));
+
+
+
+
+	}
+
+
+	//Mal formato en endDate
+	@WithMockUser(username = "clerk1", authorities = {"CLERK"})
+	@Test
+	void testCreateCourseNoSuccess2() throws Exception{
+
+		mockMvc.perform(post("/course/createCourse")
+				.with(csrf())
+				.param("price", "10.99")
+				.param("description", "Description")
+				.param("startDate", "22/09/2015")
+				.param("endDate", "22-09-2016")
+				.param("clerk", "200")
+				.param("certificate", "50"))
+		.andExpect(model().attributeHasErrors("course"))
+		.andExpect(model().attributeHasFieldErrors("course", "endDate"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("/course/create"));
+
+
+
+
+	}
+
+	//Clerk nulo
+	@WithMockUser(username = "clerk1", authorities = {"CLERK"})
+	@Test
+	void testCreateCourseNoSuccess3() throws Exception{
+
+		mockMvc.perform(post("/course/createCourse")
+				.with(csrf())
+				.param("price", "10.99")
+				.param("description", "Description")
+				.param("startDate", "22/09/2018")
+				.param("endDate", "22/09/2016")
+				.param("certificate", "50"))
+		.andExpect(model().attributeHasErrors("course"))
+		.andExpect(model().attributeHasFieldErrors("course", "clerk"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("/course/create"));
+
+
+
+
+	}
+
+	@WithMockUser(username = "owner1", authorities = {"OWNER"})
+	@Test
+	void testEnroll() throws Exception{
+		mockMvc.perform(get("/course/enroll/list")).andExpect(status().isOk())
+		.andExpect(view().name("course/enrollList")).andExpect(model().attributeExists("courses"));
+
+
+	}
 
 }

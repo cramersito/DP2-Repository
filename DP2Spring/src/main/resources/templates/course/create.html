@@ -17,7 +17,7 @@
             });
         </script>
         
-		<form th:action="@{/course/create}" id="myForm" th:object="${course}"
+		<form th:action="@{/course/createCourse}" id="myForm" th:object="${course}"
 			method="post">
 					<input type="hidden" th:field="*{id}" th:value="${course.id}"/>
             		<input type="hidden" th:field="*{version}" th:value="${course.version}"/>
@@ -87,7 +87,7 @@
 
 			<div data-for="message" class="col-md-12 form-group">
 				<div class="col-md-12 input-group-btn align-center">
-					<button name="save" type="submit"
+					<button  type="submit"
 						class="btn btn-form btn-secondary display-4">Publicar</button>
 
 

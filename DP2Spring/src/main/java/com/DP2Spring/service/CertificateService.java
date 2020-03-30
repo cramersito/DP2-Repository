@@ -29,10 +29,15 @@ public class CertificateService {
 		return new Certificate();
 	}
 	
+	@Autowired
+	public CertificateService (CertificateRepository certificateRepository) {
+		
+		 this.certificateRepository = certificateRepository;
+		
+	}
+	
 	public Certificate save(Certificate certificate) {
-		
 		return this.certificateRepository.save(certificate);
-		
 	}
 	
 	

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,8 +28,8 @@ public class CertificateController {
 	@GetMapping("/create")
 	public ModelAndView create() {
 		ModelAndView result = new ModelAndView("/certificate/create");
-		
-		Certificate certificate = this.certificateService.create();
+	
+		Certificate certificate = new Certificate();
 		
 		result.addObject("certificate", certificate);
 		
@@ -36,7 +37,7 @@ public class CertificateController {
 	}
 	
 	
-	@RequestMapping(value = "/create", params = "save")
+	@PostMapping(value = "/create")
 	public ModelAndView save(@Valid Certificate certificate, BindingResult binding) {
 		
 		ModelAndView result;
