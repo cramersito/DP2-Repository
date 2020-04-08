@@ -3,14 +3,14 @@ package com.DP2Spring.test.services;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
+import javax.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.util.IStructureModel;
@@ -20,8 +20,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.Validator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
@@ -41,7 +42,7 @@ import com.DP2Spring.service.TransportService;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-public class TransportServiceTest {
+public class TransportServiceTest  extends ValidatorTests{
 
 	
 	
@@ -60,6 +61,73 @@ public class TransportServiceTest {
 
 	
 
+	//VALIDACION (AVANZADO)
+	
+	@ParameterizedTest
+	@CsvSource({
+	"Sevilla, Utrera,PENDING,'80,81'",
+	"Sevilla, Utrera,ESTADONUEVO,'80,81'",
+	"Sevilla, Utrera,PENDING,'81'",
+	"Sevilla, ,PENDING,'80,81'",
+	", Utrera,PENDING,'80,81'",
+	", ,PENDING,'80,81'",
+	})
+	@WithMockUser("owner1")
+	void solicitarTransporteValidacion(String origin,String destination,String status, String pets) {
+
+		
+		Transport t = new Transport();
+		t.setOrigin(origin);
+		t.setDestination(destination);
+		t.setStatus(status);
+
+		Validator validator = createValidator() ;
+		Set<ConstraintViolation<Transport>> constraintViolations = validator.validate(t);
+		
+		if(constraintViolations.size()== 0) {
+			
+			 this.transportService.solicitarTransporte(t,pets);
+			entityManager.flush();
+			assertTrue(t.getId() > 0);
+		}else {
+			for(ConstraintViolation<Transport> c:  constraintViolations) {
+			
+			if(c.getPropertyPath().toString().contentEquals(("origin"))) {
+				
+				assertThat(c.getMessage()).isEqualTo("no puede estar vacío");
+				
+			}else if(c.getPropertyPath().toString().contentEquals(("destination"))) {
+				
+				assertThat(c.getMessage()).isEqualTo("no puede estar vacío");
+				
+			}else if(c.getPropertyPath().toString().contentEquals(("status"))) {
+				
+				assertTrue(c.getMessage().contentEquals("no puede estar vacío")|| c.getMessage().contentEquals("tiene que corresponder a la expresión regular \"^PENDING|TRANSPORTED$\""));
+			}
+			
+			
+			}
+		}
+
+	}
+	
+	//VALIDACIONES
+	
+	@Test
+	void nuevoObjetoTransporte() {
+
+		
+		Transport t = new Transport();
+
+
+		Validator validator = createValidator() ;
+		Set<ConstraintViolation<Transport>> constraintViolations = validator.validate(t);
+
+		assertThat(constraintViolations.size()).isEqualTo(3);
+
+	}
+	
+	
 	
 	//TEST: findOne()
 
@@ -77,6 +145,8 @@ public class TransportServiceTest {
 
 		
 	}
+	
+	
 	
 	
 	//TEST: findAll()
@@ -175,7 +245,7 @@ public class TransportServiceTest {
 		Transport t = this.transportService.create();
 		t.setOrigin("Utrera");
 		t.setDestination("Lebrija");
-		Transport tSolicitado = this.transportService.solicitarTransporte(t,"80,81");
+		Transport tSolicitado = this.transportService.solicitarTransporte(t,"80");
 		entityManager.flush();
 		Assert.isTrue(tSolicitado.getPets().size()>0,"Transporte no creado correctamente");
 		

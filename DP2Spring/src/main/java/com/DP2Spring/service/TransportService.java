@@ -22,27 +22,31 @@ public class TransportService {
 	
     // Repository
 
-    @Autowired
+
     private TransportRepository transportRepository;
 
     // Supporting services
 
 
 
-    @Autowired
+
     private OwnerService ownerService;
     
-    @Autowired
+
     private ClerkService clerkService;
 
 
-    @Autowired
+
     private PetService petService;
 
     
 	//Testing approach
 	@Autowired
-    public TransportService(TransportRepository transportRepository){
+    public TransportService(TransportRepository transportRepository,OwnerService ownerService,
+    		ClerkService clerkService,PetService petService){
+		this.ownerService = ownerService;
+		this.clerkService = clerkService;
+		this.petService = petService;
 		this.transportRepository = transportRepository;
     }
 
