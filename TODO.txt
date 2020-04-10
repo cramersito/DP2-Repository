@@ -1,0 +1,12 @@
+-Tests de validadores de servicios 
+
+-Validators Tests crear la clase
+
+-Course service class: para el setup
+dentro del constructor, dentro pasarle to los servicios de clerk course y owner y certificate 
+
+
+-Mirar la cobertura 
+
+
+-Luego a hacer test de UI

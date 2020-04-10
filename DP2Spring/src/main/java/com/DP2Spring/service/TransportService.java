@@ -2,6 +2,8 @@ package com.DP2Spring.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,27 +22,31 @@ public class TransportService {
 	
     // Repository
 
-    @Autowired
+
     private TransportRepository transportRepository;
 
     // Supporting services
 
 
 
-    @Autowired
+
     private OwnerService ownerService;
     
-    @Autowired
+
     private ClerkService clerkService;
 
 
-    @Autowired
+
     private PetService petService;
 
     
 	//Testing approach
 	@Autowired
-    public TransportService(TransportRepository transportRepository){
+    public TransportService(TransportRepository transportRepository,OwnerService ownerService,
+    		ClerkService clerkService,PetService petService){
+		this.ownerService = ownerService;
+		this.clerkService = clerkService;
+		this.petService = petService;
 		this.transportRepository = transportRepository;
     }
 
@@ -144,10 +150,23 @@ public class TransportService {
 
 
 	public Collection<Transport> transportsTransported() {
-        Collection<Transport> result;
+        Set<Transport> result = new HashSet<Transport>();
     	Owner principal = this.ownerService.findByPrincipal();
+    	Assert.notNull(principal,"Debe ser un owner");
+    	for(Pet p :this.petService.findPetsByOwnerId(principal.getId())) {
+    		
+    		result.addAll(this.transportRepository.transportsTransported(p));
+    	}
+        
+        
+		return result;
+	}
+
+	public Collection<Transport> transporteds() {
+        Collection<Transport> result;
+    	Clerk principal = this.clerkService.findByPrincipal();
     	Assert.notNull(principal,"Debe ser un clerk");
-        result = this.transportRepository.transportsTransported();
+        result = this.transportRepository.transporteds();
         
 		return result;
 	}

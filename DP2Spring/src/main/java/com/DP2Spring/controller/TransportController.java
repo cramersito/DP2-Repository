@@ -72,6 +72,18 @@ public class TransportController {
 		
 	}
 	
+	@GetMapping("/transporteds")
+	public ModelAndView transporteds() {
+		ModelAndView result = new ModelAndView("transport/transporteds");
+		
+		Collection<Transport> transportes = this.transportService.transporteds();  
+		
+		result.addObject("transportes", transportes);
+		
+		return result;
+		
+	}
+	
 	// Create
 
 	@GetMapping("/create")
