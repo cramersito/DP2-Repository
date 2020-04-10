@@ -18,7 +18,10 @@
 				<tr>
 					<th>Descripción</th>
 					<th>Precio</th>
-					<th>Ver más</th>
+					<th>Certificado</th>
+					<th>Seguro</th>
+					
+					
 				</tr>
 			</thead>
 			<tbody>
@@ -26,7 +29,9 @@
 				
 					<td th:text="${c.description}"></td>
 					<td th:text="${c.price}"></td>
-					<td><a class="btn btn-success" th:href="@{~/course/display?courseId=} + ${c.id}" > Ver más</a></td>
+					<td><a class="btn btn-success" th:if="${now > c.endDate}" th:href="@{~/certificate/display?certificateId=} + ${c.certificate.id}" > Ver mi certificado </a></td>
+					<td><a class="btn btn-success" th:if="${isExotic && now > c.endDate}" th:href="@{~/insurance/display?insuranceId=} + ${ley.id}" > Ver mi seguro </a></td>
+					
 				</tr>
 				
 				

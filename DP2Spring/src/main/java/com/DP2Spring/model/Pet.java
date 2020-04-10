@@ -65,6 +65,14 @@ private static final long serialVersionUID = 1L;
 		return birthday;
 	}
 
+	public Insurance getLaw() {
+		return law;
+	}
+
+	public void setLaw(Insurance law) {
+		this.law = law;
+	}
+
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}

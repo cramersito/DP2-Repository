@@ -192,7 +192,7 @@ public class TransportServiceTest {
 		t.setCompany("SEUR");
 		t.setStatus("TRANSPORTED");
 		Transport tTransport= this.transportService.transportar(t);
-		Assert.isTrue(tTransport != null,"Transporte no creado correctamente");
+		Assert.isTrue(tTransport != null,"Transporte creado correctamente");
 		
 	}
 	//TEST: transportar --- NEGATIVO
@@ -203,7 +203,7 @@ public class TransportServiceTest {
 	public void transportarNegNull() {
 		
 		Transport t = this.transportService.findOne(500);
-		Assertions.assertThrows(IllegalArgumentException.class,()->this.transportService.transportar(t),"Se ha transportado");
+		Assertions.assertThrows(IllegalArgumentException.class,()->this.transportService.transportar(t),"No se ha transportado");
 		
 	}
 

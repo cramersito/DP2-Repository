@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.DP2Spring.model.Certificate;
@@ -63,6 +64,17 @@ public class CertificateController {
 			}
 			
 		}
+		
+		return result;
+	}
+	
+	@GetMapping("/display")
+	public ModelAndView display(@RequestParam int certificateId) {
+		ModelAndView result = new ModelAndView("/certificate/display");
+		
+		Certificate cer = this.certificateService.findOne(certificateId);
+		
+		result.addObject("cer",cer);
 		
 		return result;
 	}

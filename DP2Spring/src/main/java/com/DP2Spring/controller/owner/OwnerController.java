@@ -1,5 +1,6 @@
 package com.DP2Spring.controller.owner;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -12,8 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.DP2Spring.model.Course;
 import com.DP2Spring.model.Owner;
+import com.DP2Spring.model.Pet;
 import com.DP2Spring.service.CourseService;
 import com.DP2Spring.service.OwnerService;
+import com.DP2Spring.service.PetService;
 
 @Controller
 @RequestMapping("/owner")
@@ -25,7 +28,10 @@ public class OwnerController {
 	private OwnerService ownerService;
 	
 	@Autowired
-	CourseService courseService;
+	private CourseService courseService;
+	
+	@Autowired
+	private PetService petService;
 	
 	
 	//Methods
@@ -63,6 +69,19 @@ public class OwnerController {
 		
 		Owner principal = this.ownerService.findByPrincipal();
 		ModelAndView result = new ModelAndView("/owner/listMyCourses");
+		Collection<Pet> pets = this.petService.findPetsByOwnerId(principal.getId());
+		boolean isExotic = false;
+		
+		for(Pet p : pets) {
+			if(p.getTipo().equals("EXOTIC")) {
+				isExotic = true;
+				result.addObject("ley", p.getLaw());
+				break;
+			}
+		}
+		
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		
 		
 		Collection<Integer> coursesId = this.courseService.getCoursesByOwner(principal.getId());
 		Collection<Course> myCourses = new ArrayList<Course>();
@@ -72,6 +91,8 @@ public class OwnerController {
 		}
 		
 		result.addObject("myCourses", myCourses);
+		result.addObject("now", now);
+		result.addObject("isExotic", isExotic);
 		
 		return result;
 		

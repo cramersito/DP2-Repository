@@ -202,21 +202,7 @@ class TransportControllerTest {
 		
 	}
 	
-	@WithMockUser(username = "owner1", authorities = {"OWNER"})
-	@Disabled
-	@Test
-	void solicitarTransporteNeg() throws Exception {
-		mockMvc.perform(post("/transport/edit/solicitarTransporte")
-				.with(csrf()))			
-				.andExpect(model().attributeHasFieldErrors("origin"))
-				.andExpect(model().attributeHasFieldErrors("destination"))
-				.andExpect(model().attributeHasFieldErrors("status"))
-				.andExpect(status().isOk())
-				.andExpect(view().name("transport/edit"));
-		
-		verify(ownerService).findByPrincipal();
-		
-	}
+	
         
 
 
