@@ -11,7 +11,7 @@ import com.DP2Spring.model.Course;
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Integer> {
 
-	@Query("select c from Course c where c.startDate <= CURRENT_DATE")
+	@Query("select c from Course c where c.startDate <= CURRENT_DATE and c.endDate >= CURRENT_DATE")
 	Collection<Course> getEnrollCourses();
 	
 

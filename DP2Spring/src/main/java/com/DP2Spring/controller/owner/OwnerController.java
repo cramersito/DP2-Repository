@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.DP2Spring.model.Course;
+import com.DP2Spring.model.Insurance;
 import com.DP2Spring.model.Owner;
 import com.DP2Spring.model.Pet;
 import com.DP2Spring.service.CourseService;
@@ -70,15 +71,16 @@ public class OwnerController {
 		Owner principal = this.ownerService.findByPrincipal();
 		ModelAndView result = new ModelAndView("/owner/listMyCourses");
 		Collection<Pet> pets = this.petService.findPetsByOwnerId(principal.getId());
+		Insurance law = this.courseService.getLaw(pets);
 		boolean isExotic = false;
 		
-		for(Pet p : pets) {
-			if(p.getTipo().equals("EXOTIC")) {
-				isExotic = true;
-				result.addObject("ley", p.getLaw());
-				break;
-			}
+		
+		if(law != null) {
+			isExotic = true;
+			result.addObject("ley",law);
 		}
+		
+		
 		
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 		
@@ -93,6 +95,7 @@ public class OwnerController {
 		result.addObject("myCourses", myCourses);
 		result.addObject("now", now);
 		result.addObject("isExotic", isExotic);
+		
 		
 		return result;
 		

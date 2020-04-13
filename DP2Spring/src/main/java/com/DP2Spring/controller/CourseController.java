@@ -66,8 +66,11 @@ public class CourseController {
 		
 		Collection<Course> courses = this.courseService.getEnrollCourses();
 		
+		boolean hasDisscount = this.courseService.CoursePassed();
+		
 		
 		result.addObject("courses", courses);
+		result.addObject("hasDisscount", hasDisscount);
 		
 		return result;
 		

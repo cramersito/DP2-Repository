@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.DP2Spring.model.Certificate;
 import com.DP2Spring.repository.CertificateRepository;
+import com.DP2Spring.repository.InsuranceRepository;
 
 @Service
 @Transactional
@@ -20,6 +21,12 @@ public class CertificateService {
 	private CertificateRepository certificateRepository;
 	
 	
+	@Autowired
+	public CertificateService (CertificateRepository certificateRepository) {
+		
+		 this.certificateRepository = certificateRepository;
+		
+	}
 	
 	
 	//Crud methods
@@ -29,12 +36,7 @@ public class CertificateService {
 		return new Certificate();
 	}
 	
-	@Autowired
-	public CertificateService (CertificateRepository certificateRepository) {
-		
-		 this.certificateRepository = certificateRepository;
-		
-	}
+	
 	
 	public Certificate save(Certificate certificate) {
 		return this.certificateRepository.save(certificate);

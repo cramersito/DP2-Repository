@@ -18,6 +18,7 @@
 				<tr>
 					<th>Descripción</th>
 					<th>Precio</th>
+					<th th:if = "${hasDisscount == true }">Precio Rebajado</th>
 					<th>Inscribete a tu curso preferido</th>
 				</tr>
 			</thead>
@@ -26,6 +27,7 @@
 				
 					<td th:text="${c.description}"></td>
 					<td th:text="${c.price}"></td>
+					<td th:if = "${hasDisscount == true }" th:text="${c.price*0.90}"></td>
 					<td><a class="btn btn-success" th:href="@{~/owner/enroll?courseId=} + ${c.id}" > Inscribirse</a></td>
 				</tr>
 				

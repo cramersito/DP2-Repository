@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.DP2Spring.model.Certificate;
 import com.DP2Spring.model.Insurance;
+import com.DP2Spring.repository.CourseRepository;
 import com.DP2Spring.repository.InsuranceRepository;
 
 @Service
@@ -21,7 +22,11 @@ public class InsuranceService {
 	private InsuranceRepository insuranceRepository;
 	
 	
-	
+	@Autowired
+	public InsuranceService(InsuranceRepository insuranceRepository) {
+		this.insuranceRepository = insuranceRepository;
+		
+	}
 	
 	//Crud methods
 	
