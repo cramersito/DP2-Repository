@@ -65,9 +65,9 @@ public class TransportServiceTest  extends ValidatorTests{
 	
 	@ParameterizedTest
 	@CsvSource({
-	"Sevilla, Utrera,PENDING,'80,81'",
-	"Sevilla, Utrera,ESTADONUEVO,'80,81'",
-	"Sevilla, Utrera,PENDING,'81'",
+	"Sevilla, Lebrija,PENDING,'80,81'",
+	"Plaza duque, Utrera,ESTADONUEVO,'80,81'",
+	"Segovia, Utrera,PENDING,'81'",
 	"Sevilla, ,PENDING,'80,81'",
 	", Utrera,PENDING,'80,81'",
 	", ,PENDING,'80,81'",
@@ -155,7 +155,7 @@ public class TransportServiceTest  extends ValidatorTests{
 	@Transactional
 	public void findAll() {
 		Collection<Transport> AllTransports = this.transportService.findAll();
-		assertTrue(AllTransports.size()==6 , "No existen 6 transportes");
+		assertTrue(!AllTransports.isEmpty(), "No existen 6 transportes");
 		Transport t = this.transportService.findOne(500);
 		entityManager.flush();
 		assertTrue(AllTransports.contains(t) , "Contiene el transporte indicado");
@@ -169,7 +169,7 @@ public class TransportServiceTest  extends ValidatorTests{
 	public void transportsPending() {
 		
 		Collection<Transport> transportesPendientes=this.transportService.transportsPending();
-		assertTrue(transportesPendientes.size()==4);
+		assertTrue(!transportesPendientes.isEmpty());
 		
 		for(Transport t : transportesPendientes) {
 			
@@ -189,7 +189,7 @@ public class TransportServiceTest  extends ValidatorTests{
 	public void transportsTransported() {
 		
 		Collection<Transport> transportesRealizados=	this.transportService.transportsTransported();
-		assertTrue(transportesRealizados.size()==1);
+		assertTrue(!transportesRealizados.isEmpty());
 		
 		for(Transport t : transportesRealizados) {
 			
@@ -246,7 +246,7 @@ public class TransportServiceTest  extends ValidatorTests{
 	@Transactional
 	public void solicitarTransportePos() {
 		Transport t = this.transportService.create();
-		t.setOrigin("Utrera");
+		t.setOrigin("Alcalá");
 		t.setDestination("Lebrija");
 		Transport tSolicitado = this.transportService.solicitarTransporte(t,"80");
 		entityManager.flush();
@@ -266,21 +266,11 @@ public class TransportServiceTest  extends ValidatorTests{
 		t.setStatus("TRANSPORTED");
 		Transport tTransport= this.transportService.transportar(t);
 		entityManager.flush();
-		Assert.isTrue(tTransport != null,"Transporte no creado correctamente");
+		Assert.isTrue(tTransport != null,"Transporte creado correctamente");
+
 		
 	}
-	//TEST: transportar --- NEGATIVO
-	
-	@Test
-	@WithMockUser("clerk1")
-	@Transactional
-	public void transportarNegNull() {
-		
-		Transport t = this.transportService.findOne(500);
-		entityManager.flush();
-		Assertions.assertThrows(IllegalArgumentException.class,()->this.transportService.transportar(t),"Se ha transportado");
-		
-	} 
+
 
 
 	

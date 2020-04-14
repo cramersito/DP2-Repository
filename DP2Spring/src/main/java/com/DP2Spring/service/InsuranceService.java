@@ -8,21 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.DP2Spring.model.Certificate;
-import com.DP2Spring.repository.CertificateRepository;
+import com.DP2Spring.model.Insurance;
+import com.DP2Spring.repository.CourseRepository;
 import com.DP2Spring.repository.InsuranceRepository;
 
 @Service
 @Transactional
-public class CertificateService {
+public class InsuranceService {
 	
 	//Attributes
 	
 	@Autowired
-	private CertificateRepository certificateRepository;
+	private InsuranceRepository insuranceRepository;
 	
 	
 
-	
 	
 	//Crud methods
 	
@@ -31,22 +31,17 @@ public class CertificateService {
 		return new Certificate();
 	}
 	
-	
-	
-	public Certificate save(Certificate certificate) {
-		return this.certificateRepository.save(certificate);
-	}
-	
+
 	
 	
 	//Other methods
 	
-	public Certificate findOne(int id) {
+	public Insurance findOne(int id) {
 		
-		return this.certificateRepository.findById(id).get();
+		return this.insuranceRepository.findById(id).get();
 	}
 	
-	public Collection<Certificate> findAll(){
-		return this.certificateRepository.findAll();
+	public Collection<Insurance> findAll(){
+		return this.insuranceRepository.findAll();
 	}
 }

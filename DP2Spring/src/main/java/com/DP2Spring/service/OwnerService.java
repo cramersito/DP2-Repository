@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 
 import com.DP2Spring.model.Course;
 import com.DP2Spring.model.Owner;
+import com.DP2Spring.repository.InsuranceRepository;
 import com.DP2Spring.repository.OwnerRepository;
 
 @Service
@@ -27,7 +28,9 @@ public class OwnerService {
 	private OwnerRepository ownerRepository;
 
 	@Autowired
-	CourseService courseService;
+	private CourseService courseService;
+	
+
 
 	// Supporting services
 

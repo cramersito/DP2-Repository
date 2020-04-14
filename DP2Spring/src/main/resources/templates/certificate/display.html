@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{master-page/layout :: layout(~{::title}, ~{::div.content})}">
+
+<head>
+<title>Mostrando certificado</title>
+<script src="https://js.stripe.com/v3/"></script>
+</head>
+
+
+<body>
+	<div class="content">
+		<section class="services2 cid-rRNDCjx6s4" id="services2-q">
+
+			<div class="container">
+				<div class="col-md-12">
+					<div class="media-container-row">
+
+
+
+						<div class="align-left aside-content">
+							<h2 class="mbr-title pt-2 mbr-fonts-style display-2">
+								<span th:text=Certificado></span>
+							</h2>
+							<div class="mbr-section-text">
+								<p
+									class="mbr-text text1 pt-2 mbr-light mbr-fonts-style display-7">
+									<strong>Entidad:</strong> <span th:text="${cer.entity}"></span>
+
+								</p>
+								<p
+									class="mbr-text text1 pt-2 mbr-light mbr-fonts-style display-7">
+									<strong>Descripción:</strong> <span
+										th:text="${cer.description}"></span>
+								</p>
+
+							</div>
+
+							<div class="col-md-6 input-group-btn align-center">
+
+								<a href="/" class="col-md-12 btn btn-warning-outline display-4">
+									Volver </a>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</section>
+	</div>
+</body>
+
+</html>

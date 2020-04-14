@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 import com.DP2Spring.model.Clerk;
 import com.DP2Spring.repository.ClerkRepository;
+import com.DP2Spring.repository.OwnerRepository;
 
 @Service
 @Transactional
@@ -22,6 +23,8 @@ public class ClerkService {
 
     @Autowired
     private ClerkRepository clerkRepository;
+    
+
 
     // Supporting services
 
