@@ -49,8 +49,7 @@ class TransportControllerTest {
 
 	private static final int TEST_TRANSPORT_ID = 500;
 	private static final int TEST_PET_ID = 80;
-	private static final int TEST_OWNER_ID = 60;
-	private static final int TEST_CLERK_ID = 200;
+
 	@MockBean
 	private TransportService transportService;
 
@@ -75,8 +74,7 @@ class TransportControllerTest {
 	void setup() {
 		given(this.transportService.findOne(TEST_TRANSPORT_ID)).willReturn(new Transport());
 		given(this.petService.myPet(TEST_PET_ID)).willReturn(new Pet());
-		given(this.ownerService.findOne(TEST_OWNER_ID)).willReturn(new Owner());
-		given(this.clerkService.findOne(TEST_CLERK_ID)).willReturn(new Clerk());
+
 		
 		tr = new Transport();
 		tr.setId(TEST_TRANSPORT_ID);
