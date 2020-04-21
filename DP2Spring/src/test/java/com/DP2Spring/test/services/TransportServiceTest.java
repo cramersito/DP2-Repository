@@ -154,6 +154,7 @@ public class TransportServiceTest  extends ValidatorTests{
 	@Test
 	@Transactional
 	public void findAll() {
+		entityManager.flush();
 		Collection<Transport> AllTransports = this.transportService.findAll();
 		assertTrue(!AllTransports.isEmpty(), "No existen 6 transportes");
 		Transport t = this.transportService.findOne(500);
@@ -245,6 +246,7 @@ public class TransportServiceTest  extends ValidatorTests{
 	@WithMockUser("owner1")
 	@Transactional
 	public void solicitarTransportePos() {
+		entityManager.flush();
 		Transport t = this.transportService.create();
 		t.setOrigin("Alcalá");
 		t.setDestination("Lebrija");
