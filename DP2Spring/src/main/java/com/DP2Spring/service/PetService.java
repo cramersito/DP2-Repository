@@ -48,6 +48,10 @@ public class PetService {
     	
     }
     
+    public Collection<Pet> findAll(){
+    	return this.PetRepository.findAll();
+    }
+    
     
 
 }

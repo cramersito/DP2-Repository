@@ -1,9 +1,7 @@
 package com.DP2Spring.test.controllers;
 
 import static org.mockito.BDDMockito.given;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -28,6 +26,7 @@ import com.DP2Spring.service.CertificateService;
 import com.DP2Spring.service.ClerkService;
 import com.DP2Spring.service.CourseService;
 import com.DP2Spring.service.OwnerService;
+import com.DP2Spring.service.PetService;
 
 
 @WebMvcTest(controllers = OwnerController.class,
@@ -36,48 +35,51 @@ excludeAutoConfiguration = SecurityConfig.class)
 @OverrideAutoConfiguration(enabled=true)
 class OwnerControllerTest {
 	
-//	@MockBean
-//	private CourseService courseService;
-//	
-//	@MockBean
-//	private ClerkService clerkService;
-//	
-//	@MockBean
-//	private CertificateService certificateService;
-//	
-//	@MockBean
-//	private OwnerService ownerService;
-//	
-//	@Autowired
-//	private MockMvc mockMvc;
-//	
-//	
-//	
-//	@BeforeEach
-//	void setUp() {
-//		
-//		
-//		given(this.ownerService.findByPrincipal()).willReturn(new Owner());
-//		given(this.certificateService.findOne(50)).willReturn(new Certificate());
-//		
-//	}
-//	
-//	@WithMockUser(username = "owner1", authorities = {"OWNER"})
-//	@Test
-//	void testListMyCourses() throws Exception{
-//		
-//		mockMvc.perform(get("/owner/listMyCourses")).andExpect(status().isOk()).andExpect(view().name("/owner/listMyCourses"))
-//		.andExpect(model().attributeExists("myCourses"));
-//	}
-//	
-//	
-//	@WithMockUser(username = "owner1", authorities = {"OWNER"})
-//	@Test
-//	void testEnroll() throws Exception{
-//		
-//		mockMvc.perform(get("/owner/enroll?courseId=403")).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/owner/listMyCourses"));
-//	}
-//	
+	@MockBean
+	private CourseService courseService;
+	
+	@MockBean
+	private ClerkService clerkService;
+	
+	@MockBean
+	private CertificateService certificateService;
+	
+	@MockBean
+	private OwnerService ownerService;
+	
+	@MockBean
+	private PetService petService;
+	
+	@Autowired
+	private MockMvc mockMvc;
+	
+	
+	
+	@BeforeEach
+	void setUp() {
+		
+		
+		given(this.ownerService.findOne(60)).willReturn(new Owner());
+		given(this.certificateService.findOne(50)).willReturn(new Certificate());
+		
+	}
+	
+	@WithMockUser(username = "owner1", authorities = {"OWNER"})
+	@Test
+	void testListMyCourses() throws Exception{
+		
+		mockMvc.perform(get("/owner/listMyCourses")).andExpect(status().isOk()).andExpect(view().name("/owner/listMyCourses"))
+		.andExpect(model().attributeExists("myCourses"));
+	}
+	
+	
+	@WithMockUser(username = "owner1", authorities = {"OWNER"})
+	@Test
+	void testEnroll() throws Exception{
+		
+		mockMvc.perform(get("/owner/enroll?courseId=403")).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/owner/listMyCourses"));
+	}
+	
 	
 	
 	

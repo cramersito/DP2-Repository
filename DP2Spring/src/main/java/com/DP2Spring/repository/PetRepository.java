@@ -10,7 +10,7 @@ import com.DP2Spring.model.Pet;
 import com.DP2Spring.model.Transport;
 
 @Repository
-public interface PetRepository  extends JpaRepository<Transport,Integer> {
+public interface PetRepository  extends JpaRepository<Pet,Integer> {
 
     @Query("select p from Pet p where p.owner.id = ?1")
     Collection<Pet> findPetsByOwnerId(int ownerId);

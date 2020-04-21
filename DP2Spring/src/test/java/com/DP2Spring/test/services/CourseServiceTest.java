@@ -21,9 +21,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.DP2Spring.model.Certificate;
 import com.DP2Spring.model.Clerk;
 import com.DP2Spring.model.Course;
+import com.DP2Spring.model.Insurance;
+import com.DP2Spring.model.Pet;
 import com.DP2Spring.service.CertificateService;
 import com.DP2Spring.service.ClerkService;
 import com.DP2Spring.service.CourseService;
+import com.DP2Spring.service.PetService;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -36,6 +39,9 @@ class CourseServiceTest {
 	@Autowired
 	protected ClerkService clerkService;
 
+	@Autowired
+	protected PetService petService;
+	
 	//Probably not necessary this collaborator
 	@Autowired
 	protected CertificateService certificateService;
@@ -54,13 +60,42 @@ class CourseServiceTest {
 
 	}
 
-	
+	@Test
+	@WithMockUser("owner1")
+	public void getCoursesByOwner() {
+		Collection<Integer> result = this.courseService.getCoursesByOwner(60);
+		assertTrue(!result.isEmpty());
+
+	}
 
 	@Test
 	void shouldFindCourse() {
 		Course course = this.courseService.findById(400);
 		assertThat(course.getDescription().equals("Curso de principantes"));
 		assertThat(course.getPrice() == 10.99);
+	}
+	
+	
+
+	@Test
+	@WithMockUser("owner1")
+	void shouldCoursePassed() {
+		assertThat(this.courseService.CoursePassed());
+		
+		
+	}
+	
+	@Test
+	@WithMockUser("owner1")
+	void shouldLaw() {
+		Collection<Pet> pets = this.petService.findAll();
+		
+		Insurance law = this.courseService.getLaw(pets);
+		
+		assertThat(law != null);
+		
+		
+		
 	}
 	
 	
