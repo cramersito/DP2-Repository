@@ -54,7 +54,7 @@ public class OwnerService {
 		enrolled.add(principal);
 		
 		
-		this.courseService.save(course);
+		this.courseService.saveEnroll(course);
 
 		
 
