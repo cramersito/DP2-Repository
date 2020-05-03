@@ -64,13 +64,13 @@ class OwnerControllerTest {
 		
 	}
 	
-	@WithMockUser(username = "owner1", authorities = {"OWNER"})
+	/*@WithMockUser(username = "owner1", authorities = {"OWNER"})
 	@Test
 	void testListMyCourses() throws Exception{
 		
 		mockMvc.perform(get("/owner/listMyCourses")).andExpect(status().isOk()).andExpect(view().name("/owner/listMyCourses"))
 		.andExpect(model().attributeExists("myCourses"));
-	}
+	}*/
 	
 	
 	@WithMockUser(username = "owner1", authorities = {"OWNER"})
