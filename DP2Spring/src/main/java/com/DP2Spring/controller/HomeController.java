@@ -18,10 +18,10 @@ public class HomeController{
 	@GetMapping("home")
 	public ModelAndView auth() {
 	
-		Object principal = this.actorService.findByPrincipal();
+		
 		
 		ModelAndView mav = new ModelAndView("miscellaneous/home");
-		mav.addObject("principal", principal);
+	
 		
 		return mav;
 
@@ -31,11 +31,11 @@ public class HomeController{
 	@GetMapping("login")
 	public ModelAndView login() {
 		
-		Object principal = this.actorService.findByPrincipal();
+		
 		
 		ModelAndView mav = new ModelAndView("login");
 	
-		mav.addObject("principal", principal);
+		
 		
 		
 		return mav;
@@ -47,12 +47,12 @@ public class HomeController{
 	@GetMapping("logout")
 	public ModelAndView logout() {
 		
-		Object principal = this.actorService.findByPrincipal();
+	
 		
 		ModelAndView mav = new ModelAndView("sign");
 		
 		
-		mav.addObject("principal", principal);
+	
 		
 		
 		return mav;

@@ -61,8 +61,18 @@ public class CourseService {
 	public Course save(Course course) {
 
 		Assert.isTrue(course.getStartDate().before(course.getEndDate()), "La fecha de inicio debe ser anterior a la fecha de fin.");
+		Assert.isTrue(!course.getStartDate().before(new Date(System.currentTimeMillis()-1)), "La fecha de inicio debe ser futura.");
 
 
+
+		return this.courseRepository.saveAndFlush(course);
+
+
+	}
+	
+	public Course saveEnroll(Course course) {
+
+	
 
 
 		return this.courseRepository.saveAndFlush(course);
