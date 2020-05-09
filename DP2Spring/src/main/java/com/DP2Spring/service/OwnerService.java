@@ -6,8 +6,10 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -18,9 +20,11 @@ import com.DP2Spring.model.Owner;
 import com.DP2Spring.repository.InsuranceRepository;
 import com.DP2Spring.repository.OwnerRepository;
 
+import ch.qos.logback.classic.Logger;
+
 @Service
 @Transactional
-public class OwnerService {
+public class OwnerService  implements UserDetails{
 
 	// Repository
 
@@ -83,12 +87,79 @@ public class OwnerService {
 		UserDetails userAccount;
 		Authentication authentication;
 
-		authentication = SecurityContextHolder.getContext().getAuthentication();
-		userAccount = (UserDetails) authentication.getPrincipal();
+		//authentication = SecurityContextHolder.getContext().getAuthentication();
+		//userAccount = (UserDetails) authentication.getPrincipal();
+		
+		Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+		
+		String username = loggedInUser.getName();
 
-		result = this.ownerRepository.findOwnerByUsername(userAccount.getUsername());
+		result = this.ownerRepository.findOwnerByUsername(username);
 		Assert.notNull(result,"El propietario no existe");
 
 		return result;
+	}
+
+
+
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
