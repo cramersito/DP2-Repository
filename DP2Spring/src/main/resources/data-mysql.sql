@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `certificate` WRITE;
 /*!40000 ALTER TABLE `certificate` DISABLE KEYS */;
-INSERT INTO `certificate` VALUES (50,0,'Certificado para curso de principiantes','Entity1'),(51,0,'Certificado para curso de animales exoticos','Entity2'),(52,0,'Certificado para curso de nivel experto','Entity3'),(53,0,'Certificado para curso de nivel intermedio','Entity4'),(54,0,'Certificado para curso de roedores','Entity5'),(55,0,'Certificado para curso de viboras','Entity6');
+INSERT INTO `certificate` VALUES (50,0,'Certificado para curso de principiantes','Entity1'),(51,0,'Certificado para curso de animales exoticos','Entity2'),(52,0,'Certificado para curso de nivel experto','Entity3'),(53,0,'Certificado para curso de nivel intermedio','Entity4'),(54,0,'Certificado para curso de roedores','Entity5'),(55,0,'Certificado para curso de viboras','Entity6'),(56,0,'Certificado para test','Entity test');
 /*!40000 ALTER TABLE `certificate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,7 +51,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (400,0,'Curso de principantes','2019-12-20 12:12:12.000000',10.99,'2019-06-20 12:12:12.000000',50,200),(401,0,'Curso de animales exoticos','2020-12-20 12:12:12.000000',10.99,'2019-06-20 12:12:12.000000',51,201),(402,0,'Curso nivel experto','2020-12-20 12:12:12.000000',10.99,'2020-06-20 12:12:12.000000',52,202),(403,0,'Curso nivel intermedio','2020-12-20 12:12:12.000000',10.99,'2020-06-20 12:12:12.000000',53,202),(404,0,'Curso para roedores','2020-12-20 12:12:12.000000',10.99,'2020-06-20 12:12:12.000000',54,201),(405,0,'Curso para viboras','2020-12-20 12:12:12.000000',10.99,'2020-06-20 12:12:12.000000',55,201);
+INSERT INTO `course` VALUES (400,0,'Curso de principantes','2019-12-20 12:12:12.000000',10.99,'2019-06-20 12:12:12.000000',50,200),(401,0,'Curso de animales exoticos','2020-12-20 12:12:12.000000',10.99,'2019-06-20 12:12:12.000000',51,201),(402,0,'Curso nivel experto','2020-12-20 12:12:12.000000',10.99,'2020-04-20 12:12:12.000000',52,202),(403,0,'Curso nivel intermedio','2020-04-20 12:12:12.000000',10.99,'2020-03-20 12:12:12.000000',53,202),(404,0,'Curso para roedores','2020-03-20 12:12:12.000000',10.99,'2020-02-20 12:12:12.000000',54,201),(405,0,'Curso para viboras','2020-12-20 12:12:12.000000',10.99,'2020-04-20 12:12:12.000000',55,201);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `course_owners_registered` WRITE;
 /*!40000 ALTER TABLE `course_owners_registered` DISABLE KEYS */;
-INSERT INTO `course_owners_registered` VALUES (400,60),(400,61),(401,62); 
+INSERT INTO `course_owners_registered` VALUES (400,60),(400,61),(404,62),(403,62); 
 /*!40000 ALTER TABLE `course_owners_registered` ENABLE KEYS */;
 UNLOCK TABLES;
 

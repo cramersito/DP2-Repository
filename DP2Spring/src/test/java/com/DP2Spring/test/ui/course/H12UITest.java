@@ -20,7 +20,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class H10UITest {
+public class H12UITest {
 
 	//	El secretario debe poder solicitar transportes de animales
 	//	consultando en la base de datos animales por transportar.
@@ -44,26 +44,23 @@ public class H10UITest {
 	//Caso positivo
 
 	@Test
-	public void testHU10UIPositivo() throws Exception {
-		driver.get("http://localhost:"+port+"/login");
+	public void testHU12UI() throws Exception {
+		driver.get("http://localhost/");
 		driver.findElement(By.linkText("Iniciar sesion")).click();
-		driver.findElement(By.xpath("//section[@id='form1-z']/div[2]/div")).click();
-		driver.findElement(By.id("phone-form1-z")).clear();
-		driver.findElement(By.id("phone-form1-z")).sendKeys("owner2");
-		driver.findElement(By.id("message-form1-z")).clear();
-		driver.findElement(By.id("message-form1-z")).sendKeys("owner2");
-		driver.findElement(By.xpath("//button[@type='submit']")).click();
-		driver.findElement(By.linkText("Mis cursos")).click();
-		driver.findElement(By.linkText("Ver mi seguro")).click();
-		driver.findElement(By.linkText("Volver")).click();
+		 driver.findElement(By.id("phone-form1-z")).click();
+		    driver.findElement(By.id("phone-form1-z")).clear();
+		    driver.findElement(By.id("phone-form1-z")).sendKeys("owner3");
+		    driver.findElement(By.id("message-form1-z")).click();
+		    driver.findElement(By.id("message-form1-z")).clear();
+		    driver.findElement(By.id("message-form1-z")).sendKeys("owner3");
+		    driver.findElement(By.xpath("//button[@type='submit']")).click();
+		driver.findElement(By.linkText("Cursos para inscribirse")).click();
+		assertEquals("Precio Rebajado", driver.findElement(By.xpath("//th[3]")).getText());
 		driver.findElement(By.linkText("Cerrar sesion")).click();
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 	}
-
-
-	//Caso negativo con fecha inicio pasada
-
-
+	
+	
 	@AfterEach
 	public void tearDown() throws Exception {
 		driver.quit();

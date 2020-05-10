@@ -73,7 +73,7 @@ public class H6UITest {
 	    driver.findElement(By.xpath("//div[@id='ui-datepicker-div']/div/a[2]/span")).click();
 	    driver.findElement(By.linkText("20")).click();
 	    driver.findElement(By.xpath("//button[@type='submit']")).click();
-	    assertEquals("test 2", driver.findElement(By.xpath("//tr[3]/td")).getText());
+	    assertEquals("test 2", driver.findElement(By.xpath("//td")).getText());
 	  }
 	 
 	 
@@ -81,7 +81,7 @@ public class H6UITest {
 	 
 	 @Test
 	  public void testHU6UINegativo() throws Exception {
-		 driver.get("http://localhost:"+port+"/login");
+		driver.get("http://localhost:"+port+"/login");
 	    driver.findElement(By.linkText("Iniciar sesion")).click();
 	    driver.findElement(By.xpath("//section[@id='form1-z']/div[2]/div")).click();
 	    driver.findElement(By.id("phone-form1-z")).clear();
