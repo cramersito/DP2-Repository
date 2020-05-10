@@ -5,12 +5,14 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import com.DP2Spring.configuration.MyUserDetailsService;
 import com.DP2Spring.model.Clerk;
 import com.DP2Spring.repository.ClerkRepository;
 import com.DP2Spring.repository.OwnerRepository;
@@ -24,6 +26,8 @@ public class ClerkService {
     @Autowired
     private ClerkRepository clerkRepository;
     
+    @Autowired
+    private MyUserDetailsService myUserDetailsService;
 
 
     // Supporting services
@@ -54,7 +58,19 @@ public class ClerkService {
         Clerk result;
         UserDetails userAccount;
         Authentication authentication;
-
+        UsernamePasswordAuthenticationToken usernameToken;
+        
+//        Optional<Clerk> clerk = this.clerkRepository.findById(200);
+//        Assert.notNull(clerk,"El propietario no existe");
+//        
+//        userAccount = this.myUserDetailsService.loadUserByUsername(clerk.get().getUserAccount().getUsername().trim());
+//		
+//		usernameToken = new UsernamePasswordAuthenticationToken(userAccount,
+//																null,
+//																userAccount.getAuthorities());
+//		
+//		SecurityContextHolder.getContext().setAuthentication(usernameToken);
+        
         authentication = SecurityContextHolder.getContext().getAuthentication();
         userAccount = (UserDetails) authentication.getPrincipal();
 

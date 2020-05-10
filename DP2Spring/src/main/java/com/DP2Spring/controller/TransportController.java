@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.DP2Spring.model.Actor;
 import com.DP2Spring.model.Clerk;
 
 import com.DP2Spring.model.Owner;
@@ -178,9 +179,11 @@ public class TransportController {
 		result.addObject("transport", transport);
 		result.addObject("messageCode", messageCode);
 		
-
-		
-		if(this.actorService.isASpecificRole(this.actorService.findByPrincipal(), "OWNER")) {
+		Owner ownerPrincipal = null;
+		Actor actor = this.actorService.findByPrincipal();	
+		ownerPrincipal= this.ownerService.findOne(actor.getId());
+	
+		if(ownerPrincipal != null) {
 			Owner owner = this.ownerService.findByPrincipal();
 			Collection<Pet> mascotas= this.petService.findPetsByOwnerId(owner.getId());
 			result.addObject("mascotas", mascotas);

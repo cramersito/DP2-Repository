@@ -28,6 +28,7 @@ public class TransportControllerIntegrationTest {
 	private static final int TEST_OWNER_ID = 60;
 	private static final int TEST_CLERK_ID = 200;
 	private static final String TEST_PETS_IDS = "80,81";
+	private static final int TEST_TRANSPORT_ID = 503;
 	
 	@Autowired
 	private TransportController transportController;
@@ -87,7 +88,7 @@ public class TransportControllerIntegrationTest {
 
 	}
 	
-	/*@WithMockUser(username = "owner1", authorities = {"OWNER"})
+	@WithMockUser(username = "owner1", authorities = {"OWNER"})
     @Test
 	void createTransport() throws Exception {
     	
@@ -100,7 +101,7 @@ public class TransportControllerIntegrationTest {
 		
 		
 	}
-    */
+    
 	@WithMockUser(username = "owner1", authorities = {"OWNER"})
     @Test
 	void testSolicitarTransporteFormSuccess() throws Exception {
@@ -116,7 +117,7 @@ public class TransportControllerIntegrationTest {
 	}
     
 	
-	/*@WithMockUser(username = "owner1", authorities = {"OWNER"})
+	@WithMockUser(username = "owner1", authorities = {"OWNER"})
     @Test
 	void testSolicitarTransporteFormHasErrors() throws Exception {
     	Transport newT=this.transportService.create();
@@ -130,6 +131,38 @@ public class TransportControllerIntegrationTest {
     	
 		assertEquals(view,"transport/edit");				
 	}
-    */
+    
 	
+	@WithMockUser(username = "clerk1", authorities = {"CLERK"})
+    @Test
+	void testTransportarFormHasErrors() throws Exception {
+    	Transport t=this.transportService.findOne(TEST_TRANSPORT_ID);
+    	
+    	 	
+    	BindingResult bindingResult=new MapBindingResult(Collections.emptyMap(),"");
+    	
+    	ModelAndView result= this.transportController.transportar(t, bindingResult);
+    	String view = result.getViewName();
+    	
+		assertEquals(view,"transport/edit");				
+	}
+	
+	@WithMockUser(username = "clerk1", authorities = {"CLERK"})
+    @Test
+	void testTransportarFormSuccess() throws Exception {
+    	Transport t=this.transportService.findOne(TEST_TRANSPORT_ID);
+    	    
+    	t.setCompany("DHL");
+    	t.setStatus("TRANSPORTED");
+    	
+    	BindingResult bindingResult=new MapBindingResult(Collections.emptyMap(),"");
+    	
+    	ModelAndView result= this.transportController.transportar(t, bindingResult);
+    	String view = result.getViewName();
+    	
+		assertEquals(view,"redirect:/transport/list");					
+	}
+    
+	
+
 }
