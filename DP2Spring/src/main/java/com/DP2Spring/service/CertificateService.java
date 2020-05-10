@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.DP2Spring.model.Certificate;
 import com.DP2Spring.repository.CertificateRepository;
-import com.DP2Spring.repository.InsuranceRepository;
 
 @Service
 @Transactional
@@ -34,7 +33,7 @@ public class CertificateService {
 	
 	
 	public Certificate save(Certificate certificate) {
-		return this.certificateRepository.save(certificate);
+		return this.certificateRepository.saveAndFlush(certificate);
 	}
 	
 	
