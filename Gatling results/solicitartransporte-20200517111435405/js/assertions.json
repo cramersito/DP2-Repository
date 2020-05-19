@@ -1,0 +1,10 @@
+{
+  "simulation": "rendimiento.SolicitarTransporte",
+  "simulationId": "solicitartransporte",
+  "start": 1589714075405,
+  "description": "",
+  "scenarios": ["SolicitarTransporte"],
+  "assertions": [
+
+  ]
+}

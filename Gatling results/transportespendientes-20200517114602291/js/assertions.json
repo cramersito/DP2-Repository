@@ -1,0 +1,10 @@
+{
+  "simulation": "rendimiento.TransportesPendientes",
+  "simulationId": "transportespendientes",
+  "start": 1589715962291,
+  "description": "",
+  "scenarios": ["Transportar"],
+  "assertions": [
+
+  ]
+}

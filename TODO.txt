@@ -10,3 +10,8 @@ dentro del constructor, dentro pasarle to los servicios de clerk course y owner 
 
 
 -Luego a hacer test de UI
+
+
+-Repositorio it unirse muller
+
+-ISPP lecciones aprendidas

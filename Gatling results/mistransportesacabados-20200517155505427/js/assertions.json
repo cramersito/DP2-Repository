@@ -1,0 +1,10 @@
+{
+  "simulation": "rendimiento.MisTransportesAcabados",
+  "simulationId": "mistransportesacabados",
+  "start": 1589730905427,
+  "description": "",
+  "scenarios": ["Transportar"],
+  "assertions": [
+
+  ]
+}
