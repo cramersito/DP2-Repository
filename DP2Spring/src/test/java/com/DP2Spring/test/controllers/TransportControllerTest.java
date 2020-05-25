@@ -201,7 +201,24 @@ class TransportControllerTest {
 	}
 	
 
-        
+	@WithMockUser(username = "owner1", authorities = {"OWNER"})
+	@Test
+	void solicitarTransporteNeg() throws Exception {
+
+		
+		mockMvc.perform(post("/transport/edit/solicitarTransporte")
+				.with(csrf())
+				.param("destination", "Sevilla")
+				.param("mascotas", Integer.toString(TEST_PET_ID)))
+		.andExpect(model().attributeHasErrors("transport"))
+		.andExpect(model().attributeHasFieldErrors("transport", "origin"))
+		.andExpect(model().attributeHasFieldErrors("transport", "status"))
+		.andExpect(view().name("transport/edit"));
+		
+		
+		
+		
+	}
 
 
 }

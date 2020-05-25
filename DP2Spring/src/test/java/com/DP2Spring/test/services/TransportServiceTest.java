@@ -72,6 +72,7 @@ public class TransportServiceTest  extends ValidatorTests{
 	", Utrera,PENDING,'80,81'",
 	", ,PENDING,'80,81'",
 	})
+	@Transactional
 	@WithMockUser("owner1")
 	void solicitarTransporteValidacion(String origin,String destination,String status, String pets) {
 
@@ -269,6 +270,19 @@ public class TransportServiceTest  extends ValidatorTests{
 		Transport tTransport= this.transportService.transportar(t);
 		entityManager.flush();
 		Assert.isTrue(tTransport != null,"Transporte creado correctamente");
+
+		
+	}
+	
+	//TEST: transportar --- NEGATIVO
+	
+	@Test
+	@WithMockUser("clerk1")
+	@Transactional
+	public void transportarNeg() {
+		
+		Transport t = this.transportService.findOne(505);
+		Assertions.assertThrows( IllegalArgumentException.class, ()->this.transportService.transportar(t));
 
 		
 	}

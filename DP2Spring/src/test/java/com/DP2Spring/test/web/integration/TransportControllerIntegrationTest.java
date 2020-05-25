@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.MapBindingResult;
 import org.springframework.web.servlet.ModelAndView;
@@ -149,8 +150,9 @@ public class TransportControllerIntegrationTest {
 	
 	@WithMockUser(username = "clerk1", authorities = {"CLERK"})
     @Test
+    @Transactional
 	void testTransportarFormSuccess() throws Exception {
-    	Transport t=this.transportService.findOne(TEST_TRANSPORT_ID);
+    	Transport t=this.transportService.findOne(505);
     	    
     	t.setCompany("DHL");
     	t.setStatus("TRANSPORTED");

@@ -181,8 +181,9 @@ public class TransportController {
 		
 		Owner ownerPrincipal = null;
 		Actor actor = this.actorService.findByPrincipal();	
+		if(actor != null) {
 		ownerPrincipal= this.ownerService.findOne(actor.getId());
-	
+		}
 		if(ownerPrincipal != null) {
 			Owner owner = this.ownerService.findByPrincipal();
 			Collection<Pet> mascotas= this.petService.findPetsByOwnerId(owner.getId());
