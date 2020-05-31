@@ -65,7 +65,7 @@ public class TransportServiceTest  extends ValidatorTests{
 	
 	@ParameterizedTest
 	@CsvSource({
-	"Sevilla, Lebrija,PENDING,'80,81'",
+	"Utrera, Lebrija,PENDING,'80,81'",
 	"Plaza duque, Utrera,ESTADONUEVO,'80,81'",
 	"Segovia, Utrera,PENDING,'81'",
 	"Sevilla, ,PENDING,'80,81'",
