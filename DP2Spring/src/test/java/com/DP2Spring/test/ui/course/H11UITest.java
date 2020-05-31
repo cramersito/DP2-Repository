@@ -33,7 +33,7 @@ public class H11UITest {
 	@BeforeEach
 	public void setUp() throws Exception {
 
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\carlo\\Desktop\\chrome\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\carlo\\Desktop\\chrome2\\chromedriver.exe");
 		driver = new ChromeDriver();
 		baseUrl = "https://www.google.com/";
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -44,7 +44,7 @@ public class H11UITest {
 
 	 @Test
 	  public void testHU11UI() throws Exception {
-	    driver.get("http://localhost/home");
+		 driver.get("http://localhost:"+port+"/login");
 	    driver.findElement(By.linkText("Iniciar sesion")).click();
 	    driver.findElement(By.id("phone-form1-z")).click();
 	    driver.findElement(By.id("phone-form1-z")).clear();
