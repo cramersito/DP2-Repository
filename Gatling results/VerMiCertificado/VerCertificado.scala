@@ -6,7 +6,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.jdbc.Predef._
 
-class PublicarCurso extends Simulation {
+class VerCertificado extends Simulation {
 
 	val httpProtocol = http
 		.baseUrl("http://www.dp2.com")
@@ -25,62 +25,42 @@ class PublicarCurso extends Simulation {
 
 
 
-	val scn = scenario("PublicarCurso")
+	val scn = scenario("VerCertificado")
 		.exec(http("Home")
 			.get("/")
 			.headers(headers_0))
-		.pause(4)
+		.pause(7)
 		// Home
 		.exec(http("IniciarSesion")
 			.get("/login")
 			.check(css("input[name=_csrf]", "value").saveAs("stoken"))
 			.headers(headers_0))
-		.pause(10)
+		.pause(17)
 		// IniciarSesion
-		.exec(http("IniciadoSesion")
+		.exec(http("IniciadoOwner")
 			.post("/login")
 			.headers(headers_2)
 			.formParam("_csrf", "${stoken}")
 			.formParam("email", "yzwE9/RxW/SrFWAwa6ssgZr6+DuITA0+Wvdgy1uHeqplluC2DtDn3OYClUUkKKI3X93iTkQlejwn26F2CmL/oq8aUp6aphezebgC2mHt1WuO3YpumP+xuLg4W7mgOxeX")
-			.formParam("username", "clerk1")
-			.formParam("password", "clerk1"))
-		.pause(6)
-		// IniciadoSesion
-		.exec(http("CrearCertificado")
-			.get("/certificate/create")
-			.check(css("input[name=_csrf]", "value").saveAs("stoken"))
+			.formParam("username", "owner1")
+			.formParam("password", "owner1"))
+		.pause(8)
+		// IniciadoOwner
+		.exec(http("MisCursos")
+			.get("/owner/listMyCourses")
 			.headers(headers_0))
-		.pause(21)
-		// CrearCertificado
-		.exec(http("CerificadoForm")
-			.post("/certificate/create")
-			.headers(headers_2)
-			.formParam("_csrf", "${stoken}")
-			.formParam("id", "0")
-			.formParam("version", "0")
-			.formParam("entity", "testing")
-			.formParam("description", "testing"))
-		.pause(38)
-		// CreateCourse
-		.exec(http("CreateCourseForm")
-			.post("/course/createCourse")
-			.headers(headers_2)
-			.formParam("_csrf", "${stoken}")
-			.formParam("id", "0")
-			.formParam("version", "0")
-			.formParam("clerk", "200")
-			.formParam("certificate", "16")
-			.formParam("description", "testing")
-			.formParam("price", "12")
-			.formParam("startDate", "02/06/2020")
-			.formParam("endDate", "02/09/2020"))
-		.pause(6)
-		// Publicado
+		.pause(8)
+		// MisCursos
+		.exec(http("MiCertificado")
+			.get("/certificate/display?certificateId=50")
+			.headers(headers_0))
+		.pause(7)
+		// MiCertificado
 
-	setUp(scn.inject(rampUsers(800) during (100 seconds))).protocols(httpProtocol)
+		setUp(scn.inject(rampUsers(1300) during (100 seconds))).protocols(httpProtocol)
     .assertions(
         global.responseTime.max.lt(5000),    
         global.responseTime.mean.lt(1000),
         global.successfulRequests.percent.gt(95)
      )
-}
+	 }
