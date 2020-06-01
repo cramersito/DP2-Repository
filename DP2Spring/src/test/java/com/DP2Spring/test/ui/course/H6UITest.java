@@ -33,6 +33,7 @@ public class H6UITest {
 	@BeforeEach
 	public void setUp() throws Exception {
 
+
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\jesus\\Desktop\\chromedriver_win32\\chromedriver.exe");
 		driver = new ChromeDriver();
 		baseUrl = "https://www.google.com/";

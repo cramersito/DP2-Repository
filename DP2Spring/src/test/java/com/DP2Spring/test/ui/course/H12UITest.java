@@ -33,7 +33,7 @@ public class H12UITest {
 	@BeforeEach
 	public void setUp() throws Exception {
 
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\carlo\\Desktop\\chrome\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\carlo\\Desktop\\chrome2\\chromedriver.exe");
 		driver = new ChromeDriver();
 		baseUrl = "https://www.google.com/";
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -44,22 +44,22 @@ public class H12UITest {
 
 	@Test
 	public void testHU12UI() throws Exception {
-		driver.get("http://localhost/");
+		driver.get("http://localhost:"+port+"/login");
 		driver.findElement(By.linkText("Iniciar sesion")).click();
-		 driver.findElement(By.id("phone-form1-z")).click();
-		    driver.findElement(By.id("phone-form1-z")).clear();
-		    driver.findElement(By.id("phone-form1-z")).sendKeys("owner3");
-		    driver.findElement(By.id("message-form1-z")).click();
-		    driver.findElement(By.id("message-form1-z")).clear();
-		    driver.findElement(By.id("message-form1-z")).sendKeys("owner3");
-		    driver.findElement(By.xpath("//button[@type='submit']")).click();
+		driver.findElement(By.id("phone-form1-z")).click();
+		driver.findElement(By.id("phone-form1-z")).clear();
+		driver.findElement(By.id("phone-form1-z")).sendKeys("owner3");
+		driver.findElement(By.id("message-form1-z")).click();
+		driver.findElement(By.id("message-form1-z")).clear();
+		driver.findElement(By.id("message-form1-z")).sendKeys("owner3");
+		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		driver.findElement(By.linkText("Cursos para inscribirse")).click();
 		assertEquals("Precio Rebajado", driver.findElement(By.xpath("//th[3]")).getText());
 		driver.findElement(By.linkText("Cerrar sesion")).click();
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 	}
-	
-	
+
+
 	@AfterEach
 	public void tearDown() throws Exception {
 		driver.quit();
