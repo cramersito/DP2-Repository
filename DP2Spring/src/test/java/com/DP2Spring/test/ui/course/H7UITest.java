@@ -59,7 +59,7 @@ public class H7UITest {
 	}
 
 
-	//Caso negativo con fecha inicio pasada
+
 
 	
 	@AfterEach

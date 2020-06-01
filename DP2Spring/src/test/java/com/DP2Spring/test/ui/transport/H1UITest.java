@@ -35,7 +35,7 @@ public class H1UITest {
 		@BeforeEach
 		public void setUp() throws Exception {
 
-			System.setProperty("webdriver.chrome.driver", "C:\\chromedriver_win32\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\jesus\\Desktop\\chromedriver_win32\\chromedriver.exe");
 			driver = new ChromeDriver();
 			baseUrl = "https://www.google.com/";
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
