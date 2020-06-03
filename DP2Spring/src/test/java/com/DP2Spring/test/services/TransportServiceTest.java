@@ -139,7 +139,7 @@ public class TransportServiceTest  extends ValidatorTests{
 	public void findOne(int transportId) {
 		
 		if(transportId > 0) {
-			Transport t = this.transportService.findOne(500);
+			Transport t = this.transportService.findOne(transportId);
 			assertNotNull(t,"El transporte existe.");
 		}else {
 			assertThrows(IllegalArgumentException.class, ()-> this.transportService.findOne(transportId),"No ha saltado la excepción esperada");
