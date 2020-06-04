@@ -50,23 +50,7 @@ public class CertificateControllerE2ETest {
 		andExpect(model().attributeExists("certificate"));
 	}
 
-	@WithMockUser(username = "clerk1", authorities = {"CLERK"})
-	@Test
-	void testCreateCertificateSuccess() throws Exception{
-		
-		
-		mockMvc.perform(post("/certificate/create")
-				.with(csrf())
-				.param("entity", "sample")
-				.param("description", "Description"))
-
-		.andExpect(status().is3xxRedirection())
-
-		//Es cero el id ya que es el que se acaba de crear
-		.andExpect(view().name("redirect:/course/create?certificateId=1"));
-
-
-	}
+	
 
 
 	@WithMockUser(username = "clerk1", authorities = {"CLERK"})
