@@ -14,7 +14,7 @@
 		<h2 style="color: #2a3d2e !important;" th:if="${transport.id != 0}">
 			Realizar transporte </h2>
 		<h2 style="color: #2a3d2e !important;" th:if="${transport.id == 0}">
-			Solicitar transporte a clínica</h2>
+			Solicitar transporte a clinica</h2>
 			
 			
 			<form th:if="${transport.id == 0}" th:action="@{/transport/edit/solicitarTransporte}" id="myForm" th:object="${transport}" method="post" class="mbr-form form-with-styler" data-form-title=" Form">

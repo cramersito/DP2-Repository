@@ -23,8 +23,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class H1UITest {
 	
-//	El secretario debe poder transportar animales
-//	consultando en la base de datos animales por transportar.
+
 	@LocalServerPort
 	private int port;
 	  private WebDriver driver;
