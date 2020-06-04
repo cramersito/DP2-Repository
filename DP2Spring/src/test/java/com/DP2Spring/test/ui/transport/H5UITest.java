@@ -33,7 +33,7 @@ public class H5UITest {
 	@BeforeEach
 	public void setUp() throws Exception {
 
-		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver_win32\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\jesus\\Desktop\\chromedriver_win32\\chromedriver.exe");
 		driver = new ChromeDriver();
 		baseUrl = "https://www.google.com/";
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -70,6 +70,39 @@ public class H5UITest {
     driver.findElement(By.xpath("//option[@value='81']")).click();
     driver.findElement(By.xpath("//button[@type='submit']")).click();
     assertEquals("Mis mascotas", driver.findElement(By.xpath("//h2")).getText());
+  }
+  
+  @Test
+  public void testH5UINeg() throws Exception {
+	    driver.get("http://localhost:"+port+"/login");
+    driver.findElement(By.id("phone-form1-z")).click();
+    driver.findElement(By.id("phone-form1-z")).clear();
+    driver.findElement(By.id("phone-form1-z")).sendKeys("owner1");
+    driver.findElement(By.id("message-form1-z")).click();
+    driver.findElement(By.id("message-form1-z")).clear();
+    driver.findElement(By.id("message-form1-z")).sendKeys("owner1");
+    driver.findElement(By.xpath("//button[@type='submit']")).click();
+    driver.findElement(By.linkText("Mis mascotas")).click();
+    try {
+      assertEquals("Mis mascotas", driver.findElement(By.xpath("//h2")).getText());
+    } catch (Error e) {
+      verificationErrors.append(e.toString());
+    }
+    assertEquals("Transportar animales", driver.findElement(By.linkText("Transportar animales")).getText());
+    driver.findElement(By.linkText("Transportar animales")).click();
+    driver.findElement(By.id("origin")).click();
+    driver.findElement(By.id("origin")).clear();
+    driver.findElement(By.id("origin")).sendKeys("");
+    driver.findElement(By.id("txtcompany1")).click();
+    driver.findElement(By.id("txtcompany1")).clear();
+    driver.findElement(By.id("txtcompany1")).sendKeys("Rota");
+    driver.findElement(By.xpath("//body")).click();
+    // ERROR: Caught exception [ERROR: Unsupported command [addSelection | name=mascotas | label=labrador]]
+    driver.findElement(By.xpath("//option[@value='80']")).click();
+    // ERROR: Caught exception [ERROR: Unsupported command [addSelection | name=mascotas | label=Cobaya]]
+    driver.findElement(By.xpath("//option[@value='81']")).click();
+    driver.findElement(By.xpath("//button[@type='submit']")).click();
+    assertEquals("Solicitar transporte a clinica", driver.findElement(By.xpath("//h2")).getText());
   }
 
   @AfterEach
