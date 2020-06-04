@@ -58,7 +58,7 @@ class InscribirCurso extends Simulation {
 		// MisCursosInscritos
 
 		
-	setUp(scn.inject(rampUsers(925) during (100 seconds))).protocols(httpProtocol)
+	setUp(scn.inject(rampUsers(200000) during (100 seconds))).protocols(httpProtocol)
     .assertions(
         global.responseTime.max.lt(5000),    
         global.responseTime.mean.lt(1000),
